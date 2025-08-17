@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login with Owl Animation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #e0f2f1;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      position: relative;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+
+    .owl {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      transition: transform 0.3s ease;
+    }
+
+    .owl.cover-eyes {
+      transform: translateX(-50%) translateY(10px);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #00796b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background: #004d40;
+    }
+
+    .login-box .links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-box .links a {
+      color: #00796b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <img src="owl.png" alt="Owl" class="owl" id="owl">
+    <h2>Welcome!</h2>
+    <form onsubmit="return validateLogin()">
+      <input type="text" id="email" placeholder="Email" onfocus="lookLeft()" onblur="lookCenter()" required>
+      <input type="password" id="password" placeholder="Password" onfocus="coverEyes()" onblur="uncoverEyes()" required>
+      <button type="submit">Login</button>
+    </form>
+    <div class="links">
+      <a href="#">Forgot Password?</a> |
+      <a href="#">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    const owl = document.getElementById("owl");
+
+    function lookLeft() {
+      owl.style.transform = "translateX(-60%)";
+    }
+
+    function lookCenter() {
+      owl.style.transform = "translateX(-50%)";
+    }
+
+    function coverEyes() {
+      owl.classList.add("cover-eyes");
+    }
+
+    function uncoverEyes() {
+      owl.classList.remove("cover-eyes");
+    }
+
+    function validateLogin() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email === "admin@example.com" && password === "1234") {
+        alert("Login successful!");
+        window.location.href = "index.html";
+        return false;
+      } else {
+        alert("Invalid email or password.");
+        return false;
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact - Nandan Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: cyan;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: cyan;
+    }
+
+    #contact {
+      text-align: center;
+      padding: 60px 10%;
+    }
+
+    #contact h2 {
+      font-size: 32px;
+      color: cyan;
+      margin-bottom: 40px;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .contact-card {
+      background: white;
+      color: black;
+      padding: 25px;
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: scale(1.05);
+    }
+
+    .contact-card i {
+      font-size: 36px;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .contact-card a {
+      color: #0f172a;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #1e293b;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #ccc;
+      border-top: 3px solid cyan;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header>
+    <h1>Nandan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificates.html">Certificate</a>
+      <a href="content.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <i class="fab fa-instagram"></i>
+        <p><a href="https://instagram.com/fusioncode87" target="_blank">@fusioncode87</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fab fa-linkedin"></i>
+        <p><a href="https://www.linkedin.com/in/fusioncode87" target="_blank">LinkedIn Profile</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <p><a href="mailto:fusioncode87@gmail.com">fusioncode87@gmail.com</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nandan. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

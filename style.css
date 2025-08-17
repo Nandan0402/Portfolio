@@ -1,0 +1,134 @@
+/* Base Reset */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  background: #f5f5f5; /* Original static background */
+}
+
+/* Header & Footer */
+header, footer {
+  background: linear-gradient(to right, #000428, #004e92);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  transform: perspective(600px) rotateX(2deg);
+}
+
+footer {
+  transform: perspective(600px) rotateX(-2deg);
+  border-top: 4px solid #0077ff;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: cyan;
+}
+
+/* Section Base */
+section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Headings */
+h2 {
+  color: #004e92;
+  margin-bottom: 20px;
+}
+
+/* Profile Image with Neon Circle */
+.profile-pic-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 30px;
+}
+
+.profile-pic-container::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: conic-gradient(#00e5ff, #0ff, #00e5ff);
+  animation: spinRing 6s linear infinite;
+  z-index: 1;
+  filter: blur(4px);
+}
+
+.profile-pic {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #0ff;
+  box-shadow: 0 0 25px #00e5ff;
+  z-index: 2;
+}
+
+/* Social Links */
+.socials {
+  margin-top: 20px;
+}
+
+.socials a {
+  font-size: 24px;
+  margin: 0 10px;
+  color: #004e92;
+  transition: 0.3s;
+}
+
+.socials a:hover {
+  color: #00bcd4;
+}
+
+/* Spinning Ring Animation */
+@keyframes spinRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .profile-pic-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-pic-container::before {
+    width: 170px;
+    height: 170px;
+  }
+}

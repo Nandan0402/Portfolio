@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Skills - Nandan Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #000428, #004e92);
+      color: white;
+    }
+
+    header {
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: cyan;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: cyan;
+    }
+
+    section {
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    h2 {
+      color: cyan;
+      margin-bottom: 30px;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: white;
+      color: #000;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 180px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(0, 255, 255, 0.4);
+    }
+
+    .skill-card h3 {
+      margin: 10px 0;
+      color: #003366;
+      font-size: 18px;
+    }
+
+    footer {
+      background: #1e293b;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #ccc;
+      border-top: 3px solid cyan;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .skill-card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nandan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificates.html">Certificate</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><h3>HTML</h3></div>
+      <div class="skill-card"><h3>CSS</h3></div>
+      <div class="skill-card"><h3>JavaScript</h3></div>
+      <div class="skill-card"><h3>Python</h3></div>
+      <div class="skill-card"><h3>C</h3></div>
+      <div class="skill-card"><h3>C++</h3></div>
+      <div class="skill-card"><h3>Java</h3></div>
+      <div class="skill-card"><h3>SharePoint</h3></div>
+      <div class="skill-card"><h3>GitHub</h3></div>
+      <div class="skill-card"><h3>Prompt Engineering</h3></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nandan</p>
+  </footer>
+
+</body>
+</html>

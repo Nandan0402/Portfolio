@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Projects - Nandan Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: cyan;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: cyan;
+    }
+
+    section#projects {
+      text-align: center;
+      padding: 60px 10%;
+    }
+
+    section#projects h2 {
+      font-size: 32px;
+      color: cyan;
+      margin-bottom: 40px;
+    }
+
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .project-card {
+      background: white;
+      color: black;
+      max-width: 320px;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .project-card h3 {
+      color: #003366;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: #333;
+    }
+
+    footer {
+      background: #1e293b;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #ccc;
+      border-top: 3px solid cyan;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .project-card {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nandan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="projects">
+    <h2>My Projects</h2>
+    <div class="project-container">
+      <div class="project-card">
+        <img src="project1.jpg" alt="To-Do App">
+        <h3>To-Do App</h3>
+        <p>A task management web app using HTML, CSS, and JavaScript.</p>
+      </div>
+      <div class="project-card">
+        <img src="project2.jpg" alt="Portfolio Website">
+        <h3>Portfolio Website</h3>
+        <p>A responsive and interactive website to showcase my work and skills.</p>
+      </div>
+      <div class="project-card">
+        <img src="project3.jpg" alt="Mapping">
+        <h3>Mapping</h3>
+        <p>This simple mapping project demonstrates how to use the Folium library in Python to create a map centered on a specific location. 
+          The map is then saved as an HTML file (output.html) that can be opened in a browser for interactive viewing. 
+          The project also showcases type checking and basic Python operations.</p>
+      </div>
+      <div class="project-card">
+        <img src="project4.jpg" alt="Math Painting">
+        <h3>Math Painting</h3>
+        <p> Math painting is a creative blend of mathematical patterns and artistic visuals, where equations, geometry, symmetry, and color theory are used to create visually appealing artworks.</p>
+      </div>
+      <div class="project-card">
+        <img src="project5.jpg" alt="Flatmate Bill">
+        <h3>Flatmate Bill </h3>
+        <p>A flatmate bill project calculates and fairly splits shared expenses (like rent, electricity, or Wi-Fi) among roommates based on usage, number of days stayed, or percentage contribution.</p>
+      </div>
+      <div class="project-card">
+        <img src="project6.png" alt="Student Form">
+        <h3>Student Form </h3>
+        <p>A Student Form project collects and stores student details like name, gender, DOB, address, etc., through a graphical or web-based interface and optionally saves the data to a file or database.</p>
+      </div>
+      <div class="project-card">
+        <img src="project7.png" alt="Sign Up">
+        <h3>Sign Up</h3>
+        <p>Sign Up allows a new user to register and create an account on a website or application.
+</p>
+      </div>
+           <div class="project-card">
+        <img src="project8.png" alt="Calculator">
+        <h3>Calculator</h3>
+        <p>A calculator is a tool used to perform basic or advanced mathematical operations like addition, subtraction, multiplication, and division.
+</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nandan</p>
+  </footer>
+
+</body>
+</html>

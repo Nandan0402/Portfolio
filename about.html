@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - Nandan Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Lottie & Tilt -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: cyan;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: cyan;
+    }
+
+    section#about {
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    section#about h2 {
+      font-size: 36px;
+      color: cyan;
+      margin-bottom: 30px;
+    }
+
+    .about-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    lottie-player {
+      max-width: 300px;
+    }
+
+    .about-card {
+      background: white;
+      color: black;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    footer {
+      background: #1e293b;
+      text-align: center;
+      padding: 20px;
+      color: #ccc;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 10px;
+      }
+
+      .about-card {
+        margin: 0 10px;
+        padding: 20px;
+      }
+
+      section#about h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nandan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificates.html">Certificate</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+
+    <div class="about-container">
+      <lottie-player
+        src="https://assets6.lottiefiles.com/packages/lf20_jtbfg2nb.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay>
+      </lottie-player>
+
+      <div class="about-card" data-tilt data-tilt-max="15" data-tilt-speed="400">
+        <p>
+          Hi! I'm <strong>Nandan</strong>, a passionate <strong>BCA student</strong> with interests in <strong>Artificial Intelligence</strong>, <strong>Full Stack Development</strong>, and creative digital problem-solving. I enjoy combining code, logic, and design to craft seamless and meaningful user experiences. 🚀
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <!-- Footer content removed as requested -->
+  </footer>
+
+  <script>
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.2
+    });
+  </script>
+
+</body>
+</html>

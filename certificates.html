@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Certificates - Nandan Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    header {
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: cyan;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: cyan;
+    }
+
+    section {
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: cyan;
+      margin-bottom: 40px;
+    }
+
+    .cert-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cert-card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cert-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(0, 255, 255, 0.3);
+    }
+
+    .cert-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid cyan;
+    }
+
+    .cert-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #e0f7fa;
+    }
+
+    footer {
+      background: #1e293b;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #ccc;
+      border-top: 3px solid cyan;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 10px;
+      }
+
+      .cert-card {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nandan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificate.html">Certificates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>My Certificates</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <img src="java-cert.png" alt="Java Certificate">
+        <p>Java Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="python-basic.png" alt="Python Beginner">
+        <p>Python - Beginner Level</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="python-advanced.png" alt="Python Advanced">
+        <p>Python - Intermediate to Advanced</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="html-cert.png" alt="HTML Certificate">
+        <p>HTML Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="css-cert.png" alt="CSS Certificate">
+        <p>CSS Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="js-cert.png" alt="JavaScript Certificate">
+        <p>JavaScript Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="sql-cert.png" alt="SQL Certificate">
+        <p>SQL Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="github-cert.png" alt="GitHub Certificate">
+        <p>Git & GitHub Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="sharepoint-cert.png" alt="SharePoint Certificate">
+        <p>SharePoint Certificate</p>
+      </div>
+
+      <div class="cert-card">
+        <img src="prompt-cert.png" alt="Prompt Engineering Certificate">
+        <p>Prompt Engineering Certificate</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nandan. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
