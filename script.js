@@ -14,17 +14,17 @@ async function fetchGitHubStats() {
         const publicRepos = data.public_repos;
         const githubFollowers = data.followers;
 
-        // Manual Counts (Update these numbers)
-        const docustoreInsta = 150; // Approximated, please update
-        const docustoreLinkedIn = 50; // Approximated, please update
-        const nandanLinkedIn = 200; // Approximated, please update
+        // Manual Counts
+        const docustoreInsta = 150;
+        const docustoreLinkedIn = 50;
+        const nandanLinkedIn = 200;
+        const totalLinkedIn = docustoreLinkedIn + nandanLinkedIn;
 
-        const totalFollowers = githubFollowers + docustoreInsta + docustoreLinkedIn + nandanLinkedIn;
-
-        // Animate Projects
+        // Animate Independent Stats
         animateValue("project-count", publicRepos);
-        // Animate Followers
-        animateValue("follower-count", totalFollowers);
+        animateValue("follower-count", githubFollowers);
+        animateValue("insta-count", docustoreInsta);
+        animateValue("linkedin-count", totalLinkedIn);
 
     } catch (error) {
         console.error("Error fetching stats:", error);
