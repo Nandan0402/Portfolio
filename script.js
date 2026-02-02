@@ -1,42 +1,70 @@
-const words = ["AI Enthusiast", "Web Developer", "Tech Explorer"];
-let i = 0;
-let j = 0;
-let isDeleting = false;
+// --- 3D Background Animation ---
+const canvas = document.getElementById('bg-canvas');
+if (canvas) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: canvas });
 
-function typeEffect() {
-    const typingElement = document.getElementById("typing");
-    if (!typingElement) return;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
 
-    const current = words[i];
-    const partial = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+    // Create particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 700;
+    const posArray = new Float32Array(particlesCount * 3);
 
-    typingElement.innerHTML = partial + '<span class="cursor">|</span>';
-
-    if (!isDeleting && j === current.length + 1) {
-        isDeleting = true;
-        setTimeout(typeEffect, 1000); // pause before deleting
-    } else if (isDeleting && j === 0) {
-        isDeleting = false;
-        i = (i + 1) % words.length;
-        setTimeout(typeEffect, 500); // pause before next word
-    } else {
-        setTimeout(typeEffect, isDeleting ? 60 : 120);
+    for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 15;
     }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+    // Cyan Material for Cyber Theme
+    const material = new THREE.PointsMaterial({
+        size: 0.02,
+        color: 0x00e5ff, // Cyan
+        transparent: true,
+        opacity: 0.8
+    });
+
+    // Create Mesh
+    const particlesMesh = new THREE.Points(particlesGeometry, material);
+    scene.add(particlesMesh);
+
+    // Mouse Interaction
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX / window.innerWidth - 0.5;
+        mouseY = event.clientY / window.innerHeight - 0.5;
+    });
+
+    // Animation Loop
+    function animate() {
+        requestAnimationFrame(animate);
+
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.001;
+
+        // Interactive movement
+        particlesMesh.rotation.y += mouseX * 0.05;
+        particlesMesh.rotation.x += mouseY * 0.05;
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    typeEffect();
-    initThreeJS();
-    // Check if we are on the projects page or home page
-    if (document.getElementById('github-projects')) {
-        fetchGitHubProjects();
-    }
-    if (document.getElementById('project-count')) {
-        fetchGitHubStats();
-    }
-});
-
-// --- GitHub Stats Integration (for Home Page) ---
+// --- GitHub Stats Animation ---
 async function fetchGitHubStats() {
     const countElement = document.getElementById('project-count');
     if (!countElement) return;
@@ -82,16 +110,14 @@ function animateValue(id, endValue) {
 }
 
 
-
-
-// --- GitHub API Integration ---
-async function fetchGitHubProjects() {
-    const container = document.getElementById('github-projects');
-    if (!container) return; // Not on projects page
+// --- GitHub API Integration (Refactored) ---
+async function fetchGitHubProjects(containerId, limit = null) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
     try {
         const username = 'Nandan0402';
-        // Fetch up to 100 repos to ensure we get all 47
+        // Fetch up to 100 repos
         const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
 
         if (!response.ok) throw new Error('Failed to fetch repositories');
@@ -101,7 +127,10 @@ async function fetchGitHubProjects() {
         // Clear loading text
         container.innerHTML = '';
 
-        repos.forEach(repo => {
+        // Apply limit if specified
+        const reposToDisplay = limit ? repos.slice(0, limit) : repos;
+
+        reposToDisplay.forEach(repo => {
             const card = document.createElement('div');
             card.className = 'project-card';
 
@@ -138,78 +167,15 @@ async function fetchGitHubProjects() {
 
     } catch (error) {
         console.error(error);
-        container.innerHTML = '<p>Error loading projects from GitHub.</p>';
+        container.innerHTML = '<p>Failed to load projects.</p>';
     }
 }
 
-// --- 3D Background (Three.js) ---
-function initThreeJS() {
-    const container = document.getElementById('bg-canvas');
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    container.appendChild(renderer.domElement);
-
-    // Particles
-    const geometry = new THREE.BufferGeometry();
-    const particlesCount = 1000; // High graphics count
-    const posArray = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
-        // Spread particles across a wide space
-        posArray[i] = (Math.random() - 0.5) * 20;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-    // Material with a "cyber" look
-    const material = new THREE.PointsMaterial({
-        size: 0.05,
-        color: 0x00ffff, // Cyan
-        transparent: true,
-        opacity: 0.8,
-    });
-
-    // Create Mesh
-    const particlesMesh = new THREE.Points(geometry, material);
-    scene.add(particlesMesh);
-
-    camera.position.z = 5;
-
-    // Mouse Interaction
-    let mouseX = 0;
-    let mouseY = 0;
-
-    document.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX / window.innerWidth - 0.5;
-        mouseY = event.clientY / window.innerHeight - 0.5;
-    });
-
-    // Animation Loop
-    const animate = () => {
-        requestAnimationFrame(animate);
-
-        // Rotation
-        particlesMesh.rotation.y += 0.002;
-        particlesMesh.rotation.x += 0.001;
-
-        // Interactive movement
-        particlesMesh.rotation.y += mouseX * 0.05;
-        particlesMesh.rotation.x += mouseY * 0.05;
-
-        renderer.render(scene, camera);
-    };
-
-    animate();
-
-    // Resize Handler
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-}
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    fetchGitHubStats();
+    // Fetch all for projects page
+    fetchGitHubProjects('github-projects');
+    // Fetch top 3 for home page
+    fetchGitHubProjects('recent-projects', 3);
+});
