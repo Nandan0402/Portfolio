@@ -49,26 +49,39 @@ async function fetchGitHubStats() {
 
         const data = await response.json();
         const publicRepos = data.public_repos;
+        const followers = data.followers;
 
-        // Animate the number
-        let current = 0;
-        const increment = Math.ceil(publicRepos / 50); // Speed of animation
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= publicRepos) {
-                current = publicRepos;
-                clearInterval(timer);
-                countElement.innerHTML = `${current}+`;
-            } else {
-                countElement.innerText = current;
-            }
-        }, 40);
+        // Animate Projects
+        animateValue("project-count", publicRepos);
+        // Animate Followers
+        animateValue("follower-count", followers);
 
     } catch (error) {
         console.error("Error fetching stats:", error);
-        countElement.innerText = "10+"; // Fallback
+        document.getElementById('project-count').innerText = "10";
+        if (document.getElementById('follower-count')) document.getElementById('follower-count').innerText = "5";
     }
 }
+
+function animateValue(id, endValue) {
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    let current = 0;
+    const increment = Math.ceil(endValue / 50) || 1;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= endValue) {
+            current = endValue;
+            clearInterval(timer);
+            element.innerHTML = `${current}`;
+        } else {
+            element.innerText = current;
+        }
+    }, 40);
+}
+
+
 
 
 // --- GitHub API Integration ---
