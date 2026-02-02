@@ -1,70 +1,5 @@
-// --- 3D Background Animation ---
-const canvas = document.getElementById('bg-canvas');
-if (canvas) {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: canvas });
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.z = 5;
-
-    // Create particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 700;
-    const posArray = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 15;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-    // Cyan Material for Cyber Theme
-    const material = new THREE.PointsMaterial({
-        size: 0.02,
-        color: 0x00e5ff, // Cyan
-        transparent: true,
-        opacity: 0.8
-    });
-
-    // Create Mesh
-    const particlesMesh = new THREE.Points(particlesGeometry, material);
-    scene.add(particlesMesh);
-
-    // Mouse Interaction
-    let mouseX = 0;
-    let mouseY = 0;
-
-    document.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX / window.innerWidth - 0.5;
-        mouseY = event.clientY / window.innerHeight - 0.5;
-    });
-
-    // Animation Loop
-    function animate() {
-        requestAnimationFrame(animate);
-
-        particlesMesh.rotation.y += 0.001;
-        particlesMesh.rotation.x += 0.001;
-
-        // Interactive movement
-        particlesMesh.rotation.y += mouseX * 0.05;
-        particlesMesh.rotation.x += mouseY * 0.05;
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // Resize Handler
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-}
-
-// --- GitHub Stats Animation ---
+// --- Stats Animation ---
 async function fetchGitHubStats() {
     const countElement = document.getElementById('project-count');
     if (!countElement) return;
@@ -110,72 +45,70 @@ function animateValue(id, endValue) {
 }
 
 
-// --- GitHub API Integration (Refactored) ---
-async function fetchGitHubProjects(containerId, limit = null) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+
+// --- GitHub API Integration ---
+async function fetchGitHubProjects() {
+    const container = document.getElementById('github-projects');
+    if (!container) return; // Not on projects page
+
+    const username = 'Nandan0402';
 
     try {
-        const username = 'Nandan0402';
-        // Fetch up to 100 repos
+        // Fetch ALL repos (up to 100 per page)
         const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
-
         if (!response.ok) throw new Error('Failed to fetch repositories');
 
         const repos = await response.json();
-
-        // Clear loading text
-        container.innerHTML = '';
-
-        // Apply limit if specified
-        const reposToDisplay = limit ? repos.slice(0, limit) : repos;
-
-        reposToDisplay.forEach(repo => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-
-            // Format date
-            const date = new Date(repo.updated_at).toLocaleDateString();
-
-            // Use GitHub OpenGraph for auto-generated repo images
-            const imageUrl = `https://opengraph.githubassets.com/1/${username}/${repo.name}`;
-
-            card.innerHTML = `
-                <img src="${imageUrl}" alt="${repo.name}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
-                <h3>${repo.name}</h3>
-                <p>${repo.description || 'No description available.'}</p>
-                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; color: cyan;">
-                    <span>⭐ ${repo.stargazers_count}</span>
-                    <span>${repo.language || 'Code'}</span>
-                </div>
-                <a href="${repo.html_url}" target="_blank" style="display: inline-block; margin-top: 15px; color: white; text-decoration: none; border: 1px solid cyan; padding: 8px 15px; border-radius: 5px; transition: 0.3s;">View Code</a>
-            `;
-
-            // Add hover effect for the button
-            const btn = card.querySelector('a');
-            btn.addEventListener('mouseover', () => {
-                btn.style.background = 'cyan';
-                btn.style.color = 'black';
-            });
-            btn.addEventListener('mouseout', () => {
-                btn.style.background = 'transparent';
-                btn.style.color = 'white';
-            });
-
-            container.appendChild(card);
-        });
+        renderProjects(repos);
 
     } catch (error) {
-        console.error(error);
-        container.innerHTML = '<p>Failed to load projects.</p>';
+        console.error("Error fetching projects:", error);
+        container.innerHTML = `<p style="color:red;">Failed to load projects from GitHub. <br> Check console for details.</p>`;
     }
 }
 
-// Initialize
+function renderProjects(repos) {
+    const container = document.getElementById('github-projects');
+    container.innerHTML = ''; // Clear loading text
+
+    repos.forEach(repo => {
+        // Create Card
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.setAttribute('data-tilt', ''); // Add Tilt effect
+
+        // OpenGraph Image (Auto-generated by GitHub)
+        const imageUrl = `https://opengraph.githubassets.com/1/${repo.full_name}`;
+
+        card.innerHTML = `
+            <img src="${imageUrl}" alt="${repo.name} Preview">
+            <div class="p-content">
+                <h3>${repo.name}</h3>
+                <p>${repo.description || 'No description available.'}</p>
+                <div class="tags">
+                    <span>⭐ ${repo.stargazers_count}</span>
+                    <span>${repo.language || 'Code'}</span>
+                </div>
+                <a href="${repo.html_url}" target="_blank">View Project</a>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+    // Re-init Tilt for new elements
+    if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll(".project-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2
+        });
+    }
+}
+
+// --- Initialize ---
 document.addEventListener('DOMContentLoaded', () => {
-    fetchGitHubStats();
-    // Fetch all for projects page
-    fetchGitHubProjects('github-projects');
-    // Fetch top 3 for home page
-    fetchGitHubProjects('recent-projects', 3);
+    fetchGitHubStats();     // For Home Page
+    fetchGitHubProjects();  // For Projects Page
 });
