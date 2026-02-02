@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Skills - Nandan Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* 3D Background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.8;
+    }
+
+    header {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: cyan;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: cyan;
+    }
+
+    section {
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    h2 {
+      color: cyan;
+      margin-bottom: 40px;
+      font-size: 32px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.05);
+      /* Glass effect */
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 200px;
+      /* Slightly wider */
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .skill-card i {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: cyan;
+    }
+
+    .skill-card h3 {
+      margin: 10px 0 0 0;
+      color: white;
+      font-size: 18px;
+    }
+
+    footer {
+      background: rgba(30, 41, 59, 0.8);
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #ccc;
+      border-top: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .skills-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .skill-card {
+        width: 80%;
+        max-width: 300px;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div id="bg-canvas"></div>
+
+  <header>
+    <h1>Nandan</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificates/">Certificates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <!-- AI/ML -->
+      <div class="skill-card">
+        <i class="fas fa-brain"></i>
+        <h3>AI & ML</h3>
+      </div>
+      <!-- Advanced AI/NL (Data Science) -->
+      <div class="skill-card">
+        <i class="fas fa-database"></i>
+        <h3>Advanced AI/NLP <br><span style="font-size: 0.8em; color: #ccc;">(Data Science)</span></h3>
+      </div>
+      <!-- Web Development (MERN Stack) -->
+      <div class="skill-card">
+        <i class="fas fa-globe"></i>
+        <h3>Web Development <br><span style="font-size: 0.8em; color: #ccc;">(MERN Stack)</span></h3>
+      </div>
+      <!-- Cyber Security -->
+      <div class="skill-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Cyber Security</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nandan</p>
+  </footer>
+
+</body>
+
+</html>
