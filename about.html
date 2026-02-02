@@ -17,15 +17,30 @@
       font-family: "Segoe UI", sans-serif;
       background: #0f172a;
       color: white;
+      overflow-x: hidden;
+    }
+
+    /* 3D Background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.8;
     }
 
     header {
-      background: #1e293b;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 50px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 10;
     }
 
     header h1 {
@@ -54,6 +69,7 @@
       font-size: 36px;
       color: cyan;
       margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
 
     .about-container {
@@ -68,19 +84,30 @@
     }
 
     .about-card {
-      background: white;
-      color: black;
+      background: rgba(255, 255, 255, 0.05);
+      /* Glass effect */
+      backdrop-filter: blur(10px);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       padding: 30px;
       max-width: 600px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.1);
+      border-color: rgba(0, 255, 255, 0.3);
     }
 
     footer {
-      background: #1e293b;
+      background: rgba(30, 41, 59, 0.8);
       text-align: center;
       padding: 20px;
       color: #ccc;
+      border-top: 1px solid rgba(0, 255, 255, 0.3);
     }
 
     @media (max-width: 600px) {
@@ -103,9 +130,13 @@
       }
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="script.js" defer></script>
 </head>
 
 <body>
+
+  <div id="bg-canvas"></div>
 
   <header>
     <h1>Nandan</h1>
@@ -139,7 +170,7 @@
   </section>
 
   <footer>
-    <!-- Footer content removed as requested -->
+    <p>© 2025 Nandan. All rights reserved.</p>
   </footer>
 
   <script>
