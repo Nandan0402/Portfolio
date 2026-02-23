@@ -4,23 +4,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About - Nandan Portfolio</title>
+  <title>About — Nandan Fire Legend Portfolio</title>
+  <meta name="description" content="About Nandan B — BCA Student, Full Stack Developer and AI Enthusiast." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Lottie & Tilt -->
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
   <style>
+    :root {
+      --fire-red: #ff3a00;
+      --fire-orange: #ff6b2b;
+      --fire-amber: #ff9d00;
+      --fire-gold: #ffd000;
+      --dark-bg: #060200;
+      --card-bg: rgba(255, 80, 0, 0.06);
+      --card-border: rgba(255, 120, 0, 0.25);
+      --text-main: #fff5e6;
+      --text-muted: #c4a88a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #0f172a;
-      color: white;
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
       overflow-x: hidden;
     }
 
-    /* 3D Background */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -28,118 +52,192 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.8;
     }
 
     header {
-      background: rgba(30, 41, 59, 0.8);
-      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 50px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      position: relative;
-      z-index: 10;
+      padding: 18px 60px;
+      background: rgba(6, 2, 0, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    header h1 {
-      font-size: 24px;
-      color: cyan;
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
     }
 
     nav a {
-      color: white;
-      margin-left: 25px;
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
+      transition: width 0.3s;
+      border-radius: 2px;
     }
 
     nav a:hover {
-      color: cyan;
+      color: var(--fire-gold);
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     section#about {
-      padding: 60px 10%;
+      padding: 80px 10%;
       text-align: center;
     }
 
     section#about h2 {
-      font-size: 36px;
-      color: cyan;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      font-family: 'Cinzel', serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 50px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(255, 157, 0, 0.2);
     }
 
     .about-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      gap: 40px;
     }
 
     lottie-player {
-      max-width: 300px;
+      max-width: 280px;
+      filter: hue-rotate(20deg) saturate(1.5);
     }
 
     .about-card {
-      background: rgba(255, 255, 255, 0.05);
-      /* Glass effect */
-      backdrop-filter: blur(10px);
-      color: #e2e8f0;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 30px;
-      max-width: 600px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 650px;
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1), 0 8px 30px rgba(0, 0, 0, 0.4);
+      line-height: 1.9;
+      font-size: 17px;
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .about-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.1);
-      border-color: rgba(0, 255, 255, 0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 0 60px rgba(255, 100, 0, 0.25), 0 15px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 157, 0, 0.5);
+    }
+
+    .about-card strong {
+      color: var(--fire-gold);
+    }
+
+    .info-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      background: rgba(255, 100, 0, 0.1);
+      border: 1px solid rgba(255, 120, 0, 0.3);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-size: 14px;
+      color: var(--fire-amber);
+      letter-spacing: 0.5px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .chip:hover {
+      background: rgba(255, 100, 0, 0.2);
+      box-shadow: 0 0 16px rgba(255, 100, 0, 0.3);
+    }
+
+    .chip i {
+      margin-right: 6px;
+      color: var(--fire-orange);
     }
 
     footer {
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(6, 2, 0, 0.8);
       text-align: center;
-      padding: 20px;
-      color: #ccc;
-      border-top: 1px solid rgba(0, 255, 255, 0.3);
+      padding: 22px;
+      margin-top: 60px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 100, 0, 0.15);
+      font-size: 14px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       header {
-        flex-direction: column;
+        padding: 14px 20px;
+        flex-wrap: wrap;
         gap: 10px;
       }
 
-      nav a {
-        margin: 10px;
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
       }
 
-      .about-card {
-        margin: 0 10px;
-        padding: 20px;
+      section#about {
+        padding: 60px 6%;
       }
 
       section#about h2 {
-        font-size: 28px;
+        font-size: 30px;
+      }
+
+      .about-card {
+        padding: 24px;
+        font-size: 15px;
       }
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="script.js" defer></script>
 </head>
 
 <body>
-
-  <div id="bg-canvas"></div>
+  <canvas id="bg-canvas"></canvas>
 
   <header>
-    <h1>Nandan</h1>
+    <span class="logo">🔥 Nandan</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -151,37 +249,44 @@
   </header>
 
   <section id="about">
-    <h2>About Me</h2>
+    <h2>⚔️ About Me</h2>
 
     <div class="about-container">
       <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_jtbfg2nb.json" background="transparent"
         speed="1" loop autoplay>
       </lottie-player>
 
-      <div class="about-card" data-tilt data-tilt-max="15" data-tilt-speed="400">
+      <div class="about-card" data-tilt data-tilt-max="10" data-tilt-speed="400">
         <p>
-          Hi! I'm <strong>Nandan</strong>, a passionate <strong>BCA student</strong> with interests in
-          <strong>Artificial Intelligence</strong>, <strong>Full Stack Development</strong>, and creative digital
-          problem-solving. I enjoy combining code, logic, and design to craft seamless and meaningful user experiences.
-          🚀
+          Hi! I'm <strong>Nandan</strong> — a passionate <strong>BCA student</strong> who walks through fire to build
+          extraordinary things. My expertise spans <strong>Artificial Intelligence</strong>,
+          <strong>Full Stack Development</strong>, and digital innovation that leaves a mark. I combine
+          raw code, battle-tested logic, and elegant design to forge seamless, meaningful user experiences.
+          Every project is a legend in the making. 🔥
         </p>
+        <div class="info-chips">
+          <span class="chip"><i class="fas fa-brain"></i> AI &amp; ML</span>
+          <span class="chip"><i class="fas fa-code"></i> Full Stack Dev</span>
+          <span class="chip"><i class="fas fa-shield-alt"></i> Cyber Security</span>
+          <span class="chip"><i class="fas fa-store"></i> Founder — Docustore</span>
+          <span class="chip"><i class="fas fa-globe"></i> MERN Stack</span>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2025 Nandan. All rights reserved.</p>
+    <p>© 2025 Nandan · Forged with 🔥</p>
   </footer>
 
+  <script src="script.js" defer></script>
   <script>
-    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-      max: 15,
-      speed: 400,
-      glare: true,
-      "max-glare": 0.2
+    document.addEventListener('DOMContentLoaded', () => {
+      VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 10, speed: 400, glare: true, "max-glare": 0.15
+      });
     });
   </script>
-
 </body>
 
 </html>

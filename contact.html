@@ -2,19 +2,47 @@
 <html lang="en">
 
 <head>
-  <title>Contact - Nandan Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Nandan Fire Legend Portfolio</title>
+  <meta name="description" content="Contact Nandan B — reach out through GitHub, LinkedIn, Instagram, or email." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
+    :root {
+      --fire-red: #ff3a00;
+      --fire-orange: #ff6b2b;
+      --fire-amber: #ff9d00;
+      --fire-gold: #ffd000;
+      --dark-bg: #060200;
+      --card-bg: rgba(255, 80, 0, 0.06);
+      --card-border: rgba(255, 120, 0, 0.25);
+      --text-main: #fff5e6;
+      --text-muted: #c4a88a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      background: #0f172a;
-      color: white;
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
       overflow-x: hidden;
     }
 
-    /* 3D Background */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -22,179 +50,244 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.8;
     }
 
     header {
-      background: rgba(30, 41, 59, 0.8);
-      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 50px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      position: relative;
-      z-index: 10;
+      padding: 18px 60px;
+      background: rgba(6, 2, 0, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    header h1 {
-      font-size: 24px;
-      color: cyan;
-      margin: 0;
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     nav {
       display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+      gap: 28px;
     }
 
     nav a {
-      color: white;
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
+      transition: width 0.3s;
+      border-radius: 2px;
     }
 
     nav a:hover {
-      color: cyan;
+      color: var(--fire-gold);
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     #contact {
+      padding: 80px 8%;
       text-align: center;
-      padding: 60px 10%;
     }
 
     #contact h2 {
-      font-size: 32px;
-      color: cyan;
-      margin-bottom: 40px;
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      font-family: 'Cinzel', serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 50px;
     }
 
     .contact-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
+      gap: 28px;
     }
 
     .contact-card {
-      background: rgba(255, 255, 255, 0.05);
-      /* Glass effect */
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
-      padding: 30px;
-      width: 250px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 38px 28px;
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+      text-decoration: none;
+      color: inherit;
     }
 
     .contact-card:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+      transform: translateY(-8px) scale(1.04);
+      box-shadow: 0 0 40px rgba(255, 100, 0, 0.35), 0 15px 35px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 157, 0, 0.5);
     }
 
-    .contact-card i {
-      font-size: 40px;
-      color: cyan;
-      margin-bottom: 15px;
+    .contact-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, rgba(255, 80, 0, 0.2), rgba(255, 157, 0, 0.1));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      border: 1px solid rgba(255, 120, 0, 0.3);
+      color: var(--fire-orange);
+      transition: box-shadow 0.3s;
     }
 
-    .contact-card p a {
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: 0.3s;
+    .contact-card:hover .contact-icon {
+      box-shadow: 0 0 24px rgba(255, 100, 0, 0.6);
+      color: var(--fire-gold);
     }
 
-    .contact-card p a:hover {
-      color: cyan;
-      text-decoration: none;
+    .contact-card h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .contact-card p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
     footer {
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(6, 2, 0, 0.8);
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      color: #ccc;
-      border-top: 1px solid rgba(0, 255, 255, 0.3);
+      padding: 22px;
+      margin-top: 60px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 100, 0, 0.15);
+      font-size: 14px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       header {
-        flex-direction: column;
+        padding: 14px 20px;
+        flex-wrap: wrap;
         gap: 10px;
       }
 
       nav {
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      #contact h2 {
+        font-size: 30px;
       }
 
       .contact-card {
-        width: 100%;
+        width: 90%;
         max-width: 300px;
       }
     }
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="script.js" defer></script>
 </head>
 
 <body>
-
-  <div id="bg-canvas"></div>
+  <canvas id="bg-canvas"></canvas>
 
   <header>
-    <h1>Nandan</h1>
+    <span class="logo">🔥 Nandan</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
       <a href="certificates/">Certificates</a>
-      <a href="content.html">Contact</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
   <section id="contact">
-    <h2>Contact Me</h2>
+    <h2>📬 Contact Me</h2>
+    <p class="section-subtitle">Ready to forge something legendary together? Reach out.</p>
+
     <div class="contact-grid">
 
-      <div class="contact-card">
-        <i class="fab fa-instagram"></i>
-        <p><a href="https://www.instagram.com/docu__store/?hl=en" target="_blank">@docu__store</a></p>
-      </div>
+      <a class="contact-card" href="https://www.instagram.com/docu__store/?hl=en" target="_blank">
+        <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+        <h3>Instagram</h3>
+        <p>@docu__store</p>
+      </a>
 
-      <div class="contact-card">
-        <i class="fab fa-linkedin"></i>
-        <p><a href="https://www.linkedin.com/in/nandan-b-2a9b1b334" target="_blank">Nandan B</a></p>
-      </div>
+      <a class="contact-card" href="https://www.linkedin.com/in/nandan-b-2a9b1b334" target="_blank">
+        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+        <h3>LinkedIn</h3>
+        <p>Nandan B</p>
+      </a>
 
-      <div class="contact-card">
-        <i class="fas fa-envelope"></i>
-        <p><a href="mailto:fusioncode87@gmail.com">Docu Store</a></p>
-      </div>
+      <a class="contact-card" href="mailto:fusioncode87@gmail.com">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <h3>Email</h3>
+        <p>Docu Store</p>
+      </a>
 
-      <div class="contact-card">
-        <i class="fas fa-globe"></i>
-        <p><a href="https://docustore-frontend.onrender.com" target="_blank">Docustore Website</a></p>
-      </div>
+      <a class="contact-card" href="https://docustore-frontend.onrender.com" target="_blank">
+        <div class="contact-icon"><i class="fas fa-globe"></i></div>
+        <h3>Docustore</h3>
+        <p>Visit Website</p>
+      </a>
+
+      <a class="contact-card" href="https://github.com/Nandan0402" target="_blank">
+        <div class="contact-icon"><i class="fab fa-github"></i></div>
+        <h3>GitHub</h3>
+        <p>Nandan0402</p>
+      </a>
 
     </div>
   </section>
 
   <footer>
-    <p>© 2025 Nandan. All rights reserved.</p>
+    <p>© 2025 Nandan · Forged with 🔥</p>
   </footer>
 
+  <script src="script.js" defer></script>
 </body>
 
 </html>

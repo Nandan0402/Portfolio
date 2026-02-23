@@ -2,126 +2,48 @@
 <html lang="en">
 
 <head>
-  <title>Projects - Nandan Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Nandan Fire Legend Portfolio</title>
+  <meta name="description" content="Projects built by Nandan B — GitHub repositories showcased." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+
   <style>
+    :root {
+      --fire-red: #ff3a00;
+      --fire-orange: #ff6b2b;
+      --fire-amber: #ff9d00;
+      --fire-gold: #ffd000;
+      --dark-bg: #060200;
+      --card-bg: rgba(255, 80, 0, 0.06);
+      --card-border: rgba(255, 120, 0, 0.25);
+      --text-main: #fff5e6;
+      --text-muted: #c4a88a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
-      background: #0f172a;
-      color: white;
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
     }
 
-    header {
-      background: #1e293b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-
-    header h1 {
-      font-size: 24px;
-      color: cyan;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: cyan;
-    }
-
-    section#projects {
-      text-align: center;
-      padding: 60px 10%;
-    }
-
-    section#projects h2 {
-      font-size: 32px;
-      color: cyan;
-      margin-bottom: 40px;
-    }
-
-    .project-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    .project-card {
-      background: white;
-      color: black;
-      max-width: 320px;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .project-card h3 {
-      color: #003366;
-      margin-bottom: 10px;
-    }
-
-    .project-card p {
-      color: #333;
-    }
-
-    footer {
-      background: #1e293b;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      color: #ccc;
-      border-top: 3px solid cyan;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .project-card {
-        max-width: 90%;
-      }
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <style>
-    /* ... existing styles ... */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -129,39 +51,213 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.8;
     }
 
-    /* Enhance project cards for the high-end look */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: rgba(6, 2, 0, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+
+    nav a:hover {
+      color: var(--fire-gold);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section#projects {
+      padding: 80px 6%;
+      text-align: center;
+    }
+
+    section#projects h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 50px;
+    }
+
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+    }
+
     .project-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      max-width: 320px;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      overflow: hidden;
+      width: 300px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+      transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
     }
 
-    .project-card h3 {
-      color: cyan;
-      /* Changed from dark blue for better contrast on dark bg */
-      margin-bottom: 10px;
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 0 40px rgba(255, 100, 0, 0.4), 0 15px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 157, 0, 0.6);
     }
 
-    .project-card p {
-      color: #e2e8f0;
-      /* Lighter text for dark mode */
+    .project-card img {
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+    }
+
+    .p-content {
+      padding: 18px;
+      text-align: left;
+    }
+
+    .p-content h3 {
+      color: var(--fire-gold);
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .p-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tags span {
+      background: rgba(255, 100, 0, 0.12);
+      border: 1px solid rgba(255, 120, 0, 0.25);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--fire-amber);
+    }
+
+    .p-content a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--dark-bg);
+      background: linear-gradient(135deg, var(--fire-orange), var(--fire-amber));
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+
+    .p-content a:hover {
+      box-shadow: 0 0 20px rgba(255, 100, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: rgba(6, 2, 0, 0.8);
+      text-align: center;
+      padding: 22px;
+      margin-top: 60px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 100, 0, 0.15);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      section#projects h2 {
+        font-size: 28px;
+      }
+
+      .project-card {
+        width: 90%;
+        max-width: 340px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div id="bg-canvas"></div>
+  <canvas id="bg-canvas"></canvas>
+
   <header>
-    <h1>Nandan</h1>
+    <span class="logo">🔥 Nandan</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -173,21 +269,18 @@
   </header>
 
   <section id="projects">
-    <h2>My Projects</h2>
-
-    <!-- Dynamic GitHub Projects -->
+    <h2>🔥 My Projects</h2>
+    <p class="section-subtitle">Battle-tested builds — straight from GitHub</p>
     <div class="project-container" id="github-projects">
-      <p>Loading projects from GitHub...</p>
+      <p style="color: var(--text-muted); font-style: italic;">Loading forge output...</p>
     </div>
   </section>
 
-  <!-- Scripts -->
-  <script src="script.js"></script>
-
   <footer>
-    <p>© 2025 Nandan</p>
+    <p>© 2025 Nandan · Forged with 🔥</p>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 
 </html>
