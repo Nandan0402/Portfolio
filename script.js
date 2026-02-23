@@ -231,11 +231,7 @@ function renderProjects(repos) {
         container.appendChild(card);
     });
 
-    if (typeof VanillaTilt !== 'undefined') {
-        VanillaTilt.init(document.querySelectorAll(".project-card"), {
-            max: 15, speed: 400, glare: true, "max-glare": 0.2
-        });
-    }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
