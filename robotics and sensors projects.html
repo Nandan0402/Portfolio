@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Robotics &amp; Sensors Projects — Nandan Fire Legend Portfolio</title>
+    <meta name="description" content="Robotics and Sensors projects by Nandan B — IoT, embedded systems, and more." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+
+    <style>
+        :root {
+            --fire-red: #ff3a00;
+            --fire-orange: #ff6b2b;
+            --fire-amber: #ff9d00;
+            --fire-gold: #ffd000;
+            --dark-bg: #060200;
+            --card-bg: rgba(255, 80, 0, 0.06);
+            --card-border: rgba(255, 120, 0, 0.25);
+            --text-main: #fff5e6;
+            --text-muted: #c4a88a;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background: rgba(6, 2, 0, 0.75);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+            box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: var(--fire-gold);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--fire-gold);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ── Page section ── */
+        section#robotics {
+            padding: 80px 6%;
+            text-align: center;
+        }
+
+        section#robotics h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        /* ── Project grid ── */
+        .project-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+            transition: box-shadow 0.35s, border-color 0.35s;
+            text-align: left;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 0 40px rgba(255, 100, 0, 0.4), 0 15px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 157, 0, 0.6);
+        }
+
+        .project-card .card-icon {
+            width: 100%;
+            height: 145px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            background: linear-gradient(135deg, rgba(255, 80, 0, 0.12), rgba(255, 160, 0, 0.08));
+            border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+        }
+
+        .p-content {
+            padding: 18px;
+        }
+
+        .p-content h3 {
+            color: var(--fire-gold);
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .p-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .tags span {
+            background: rgba(255, 100, 0, 0.12);
+            border: 1px solid rgba(255, 120, 0, 0.25);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--fire-amber);
+        }
+
+        .p-content a.btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--fire-orange), var(--fire-amber));
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: box-shadow 0.3s, transform 0.2s;
+        }
+
+        .p-content a.btn:hover {
+            box-shadow: 0 0 20px rgba(255, 100, 0, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* ── Empty state ── */
+        .empty-state {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 16px;
+            padding: 40px;
+        }
+
+        footer {
+            background: rgba(6, 2, 0, 0.8);
+            text-align: center;
+            padding: 22px;
+            margin-top: 60px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 100, 0, 0.15);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 14px 20px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+
+            section#robotics h2 {
+                font-size: 28px;
+            }
+
+            .project-card {
+                width: 90%;
+                max-width: 340px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <span class="logo">Nandan</span>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="projects.html">Projects</a>
+            <a href="robotics and sensors projects.html" class="active">Robotics and Sensors projects</a>
+            <a href="certificates/">Certificates</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section id="robotics">
+        <h2>🤖 Robotics &amp; Sensors Projects</h2>
+        <p class="section-subtitle">Embedded systems, IoT, and hardware-meets-software builds</p>
+
+        <div class="coming-soon-box">
+            <div class="cs-icon">⚙️</div>
+            <h3>Coming Soon</h3>
+            <p>Robotics &amp; Sensor projects are being assembled in the forge. Check back soon!</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Nandan · Forged with 🔥</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

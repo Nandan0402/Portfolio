@@ -207,6 +207,245 @@
       letter-spacing: 0.5px;
     }
 
+    .view-btn {
+      margin-top: 4px;
+      background: linear-gradient(135deg, rgba(255, 80, 0, 0.18), rgba(255, 157, 0, 0.1));
+      border: 1px solid rgba(255, 120, 0, 0.35);
+      border-radius: 30px;
+      color: var(--fire-amber);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+      letter-spacing: 0.4px;
+      font-family: 'Outfit', sans-serif;
+      z-index: 1;
+    }
+
+    .view-btn:hover {
+      background: rgba(255, 120, 0, 0.28);
+      box-shadow: 0 0 14px rgba(255, 100, 0, 0.5);
+      color: var(--fire-gold);
+    }
+
+    /* ══ PARCHMENT MODAL ══════════════════════════════════ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(5px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    /* ══ TREASURE MAP PAPER ══ */
+    .modal-box {
+      /* Aged map paper with corner stains + faint grid */
+      background:
+        radial-gradient(circle at 5% 5%, rgba(110, 60, 0, 0.45) 0%, transparent 28%),
+        radial-gradient(circle at 95% 5%, rgba(90, 50, 0, 0.35) 0%, transparent 25%),
+        radial-gradient(circle at 5% 95%, rgba(100, 55, 0, 0.40) 0%, transparent 28%),
+        radial-gradient(circle at 95% 95%, rgba(120, 70, 0, 0.35) 0%, transparent 26%),
+        radial-gradient(ellipse at 50% 50%, rgba(210, 170, 80, 0.12) 0%, transparent 65%),
+        linear-gradient(rgba(100, 65, 15, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 65, 15, 0.07) 1px, transparent 1px),
+        linear-gradient(155deg, #e5cf96 0%, #cead62 30%, #bf9840 60%, #d4b968 100%);
+      background-size:
+        100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+        32px 32px, 32px 32px, 100% 100%;
+      /* Torn / hand-cut edges */
+      clip-path: polygon(0% 2%, 2% 0%, 5% 1.5%, 9% 0%, 14% 2%, 19% 0.5%, 25% 0%,
+          31% 1.8%, 37% 0%, 43% 1.2%, 49% 0%, 55% 2%, 61% 0.5%, 67% 0%,
+          73% 1.5%, 79% 0%, 85% 2%, 91% 0.5%, 95% 1.5%, 98% 0%, 100% 2%,
+          100% 98%, 98% 100%, 94% 98.5%, 89% 100%, 84% 98%, 79% 100%, 74% 98.5%,
+          68% 100%, 62% 98%, 56% 100%, 50% 98.5%, 44% 100%, 38% 98%, 32% 100%,
+          26% 98.5%, 20% 100%, 14% 98%, 9% 100%, 4% 98.5%, 1% 100%, 0% 98%);
+      /* Drop shadow follows the torn clip-path */
+      filter:
+        drop-shadow(0 8px 20px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 8px rgba(80, 40, 0, 0.55));
+      border-radius: 0;
+      padding: 52px 44px 44px;
+      max-width: 480px;
+      width: 90%;
+      position: relative;
+      overflow: hidden;
+      animation: paperUnfurl 0.45s cubic-bezier(.22, .68, 0, 1.3);
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #2a1000;
+    }
+
+    /* Inner rope/frame border */
+    .modal-box::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border: 2px solid rgba(90, 50, 5, 0.35);
+      box-shadow: inset 0 0 0 3px rgba(160, 100, 20, 0.12);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Grain + compass rose decoration */
+    .modal-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes paperUnfurl {
+      0% {
+        opacity: 0;
+        transform: translateY(90vh) scale(0.3) rotate(-22deg);
+      }
+
+      55% {
+        opacity: 1;
+        transform: translateY(-22px) scale(1.07) rotate(3deg);
+      }
+
+      72% {
+        transform: translateY(10px) scale(0.96) rotate(-1.5deg);
+      }
+
+      86% {
+        transform: translateY(-6px) scale(1.02) rotate(0.8deg);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+    }
+
+    /* Burn canvas — overlaid, pointer-events none so content still readable till fire hits */
+    #burnCanvas {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      border-radius: 6px;
+    }
+
+    /* Close stamp button */
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: radial-gradient(circle, #8b1a00 0%, #5a0d00 100%);
+      border: 2px solid #c04010;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5c87a;
+      font-size: 13px;
+      cursor: pointer;
+      z-index: 20;
+      box-shadow: 0 0 8px rgba(180, 40, 0, 0.6);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .modal-close:hover {
+      box-shadow: 0 0 18px rgba(255, 80, 0, 0.9);
+      transform: scale(1.12);
+    }
+
+    /* Treasure map content styles */
+    .modal-icon {
+      font-size: 50px;
+      margin-bottom: 12px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #2e0d00;
+      margin: 0 0 10px;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 0 rgba(255, 210, 120, 0.5);
+      position: relative;
+      z-index: 1;
+      /* X-marks-the-spot divider */
+      border-bottom: none;
+      padding-bottom: 10px;
+    }
+
+    .modal-title::after {
+      content: '×·····························×';
+      display: block;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: rgba(90, 45, 5, 0.5);
+      margin-top: 6px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .modal-tag {
+      display: inline-block;
+      background: rgba(120, 70, 10, 0.12);
+      border: 1px solid #9b6a20;
+      border-radius: 4px;
+      padding: 3px 14px;
+      font-size: 12px;
+      color: #6b3800;
+      margin-bottom: 18px;
+      font-style: italic;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-desc {
+      color: #3d2000;
+      font-size: 15px;
+      line-height: 2;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      text-align: justify;
+    }
+
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-tags span {
+      background: rgba(120, 70, 0, 0.1);
+      border: 1px solid #9b6a20;
+      border-radius: 4px;
+      padding: 4px 13px;
+      font-size: 12px;
+      color: #5a2e00;
+      letter-spacing: 0.4px;
+      font-style: italic;
+    }
+
     footer {
       background: rgba(6, 2, 0, 0.8);
       text-align: center;
@@ -251,6 +490,7 @@
       <a href="about.html">About</a>
       <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
+      <a href="robotics and sensors projects.html">Robotics and Sensors projects</a>
       <a href="certificates/">Certificates</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -265,46 +505,382 @@
         <div class="skill-icon">🧠</div>
         <h3>AI &amp; ML</h3>
         <span>Machine Learning</span>
+        <button class="view-btn"
+          onclick="openModal('AI &amp; ML','🧠','Machine Learning','Building intelligent systems using supervised, unsupervised, and reinforcement learning. Experienced with model training, evaluation, and deployment pipelines.','Python,TensorFlow,Scikit-learn,NumPy,Pandas')"><i
+            class="fas fa-eye"></i> View</button>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">📊</div>
         <h3>Advanced AI / NLP</h3>
         <span>Data Science</span>
+        <button class="view-btn"
+          onclick="openModal('Advanced AI / NLP','📊','Data Science','Working with large language models, natural language processing pipelines, sentiment analysis, and transformers. Skilled in processing and understanding human language at scale.','NLP,Transformers,LLMs,HuggingFace,OpenAI API')"><i
+            class="fas fa-eye"></i> View</button>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">🌐</div>
         <h3>Web Development</h3>
         <span>MERN Stack</span>
+        <button class="view-btn"
+          onclick="openModal('Web Development','🌐','MERN Stack','Crafting full-featured web apps with React, Node.js, Express, and MongoDB. Focus on responsive design, performance, and seamless user experiences.','React,Node.js,Express,MongoDB,HTML,CSS')"><i
+            class="fas fa-eye"></i> View</button>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">🛡️</div>
         <h3>Cyber Security</h3>
         <span>Ethical Hacking</span>
+        <button class="view-btn"
+          onclick="openModal('Cyber Security','🛡️','Ethical Hacking','Understanding attack vectors, vulnerability scanning, penetration testing, and network security. Committed to building and protecting secure digital infrastructure.','Kali Linux,Wireshark,Metasploit,OWASP,Network Security')"><i
+            class="fas fa-eye"></i> View</button>
       </div>
 
       <div class="skill-card">
-        <div class="skill-icon">⚡</div>
-        <h3>Full Stack Dev</h3>
-        <span>React &amp; Node.js</span>
+        <div class="skill-icon">📣</div>
+        <h3>Marketing</h3>
+        <span>Digital &amp; Growth</span>
+        <button class="view-btn"
+          onclick="openModal('Marketing','📣','Digital &amp; Growth','Driving brand awareness and user acquisition through digital channels — SEO, social media, content strategy, and growth hacking. Experience growing Docustore\'s online presence.','SEO,Content Strategy,Social Media,Google Ads,Analytics')"><i
+            class="fas fa-eye"></i> View</button>
       </div>
 
       <div class="skill-card">
-        <div class="skill-icon">🗄️</div>
-        <h3>Databases</h3>
-        <span>MongoDB &amp; SQL</span>
+        <div class="skill-icon">💼</div>
+        <h3>Sales</h3>
+        <span>Strategy &amp; Outreach</span>
+        <button class="view-btn"
+          onclick="openModal('Sales','💼','Strategy &amp; Outreach','Skilled in B2B and B2C sales strategy, client outreach, lead generation, and building long-term customer relationships. Experience pitching and closing deals for tech products.','B2B Sales,CRM,Lead Generation,Client Relations,Pitch Decks')"><i
+            class="fas fa-eye"></i> View</button>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h3>Cloud Computing</h3>
+        <span>AWS &amp; Azure</span>
+        <button class="view-btn"
+          onclick="openModal('Cloud Computing','☁️','AWS &amp; Azure','Deploying and managing scalable cloud infrastructure. Experience with serverless functions, cloud storage, VMs, CI/CD pipelines, and containerised applications.','AWS,Azure,Docker,CI/CD,Serverless,S3')"><i
+            class="fas fa-eye"></i> View</button>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>Robotics &amp; Sensors</h3>
+        <span>IoT &amp; Embedded Systems</span>
+        <button class="view-btn"
+          onclick="openModal('Robotics &amp; Sensors','🤖','IoT &amp; Embedded Systems','Designing and programming embedded systems and robotic components. Experience with sensor integration, real-time data acquisition, and automation using microcontrollers.','Arduino,Raspberry Pi,IoT,Sensors,C++,Embedded C')"><i
+            class="fas fa-eye"></i> View</button>
       </div>
 
     </div>
   </section>
+
+  <!-- Skill Detail Modal — Parchment Paper -->
+  <div class="modal-overlay" id="skillModal" onclick="handleOverlayClick(event)">
+    <div class="modal-box" id="modalBox">
+      <!-- burn canvas on top of paper content -->
+      <canvas id="burnCanvas"></canvas>
+      <button class="modal-close" id="burnBtn" title="Close"><i class="fas fa-times"></i></button>
+      <span class="modal-icon" id="mIcon"></span>
+      <h3 class="modal-title" id="mTitle"></h3>
+      <div class="modal-tag" id="mTag"></div>
+      <p class="modal-desc" id="mDesc"></p>
+      <div class="modal-tags" id="mTags"></div>
+    </div>
+  </div>
 
   <footer>
     <p>© 2025 Nandan · Forged with 🔥</p>
   </footer>
 
   <script src="script.js" defer></script>
+  <script>
+    // ── Open-swoosh sound ───────────────────────────────────
+    function playOpenSound() {
+      try {
+        const ac = new (window.AudioContext || window.webkitAudioContext)();
+        if (ac.state === 'suspended') ac.resume();
+        const now = ac.currentTime;
+
+        // Rising pitch swoosh
+        const osc = ac.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(80, now);
+        osc.frequency.exponentialRampToValueAtTime(1100, now + 0.55);
+        const swG = ac.createGain();
+        swG.gain.setValueAtTime(0, now);
+        swG.gain.linearRampToValueAtTime(0.28, now + 0.12);
+        swG.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        osc.connect(swG); swG.connect(ac.destination);
+        osc.start(now); osc.stop(now + 0.56);
+
+        // Soft paper rustle
+        const rLen = Math.floor(ac.sampleRate * 0.35);
+        const rBuf = ac.createBuffer(1, rLen, ac.sampleRate);
+        const rd = rBuf.getChannelData(0);
+        for (let i = 0; i < rLen; i++)
+          rd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / rLen, 0.6);
+        const rSrc = ac.createBufferSource(); rSrc.buffer = rBuf;
+        const rBp = ac.createBiquadFilter(); rBp.type = 'bandpass'; rBp.frequency.value = 3500; rBp.Q.value = 1;
+        const rG = ac.createGain();
+        rG.gain.setValueAtTime(0.45, now + 0.05);
+        rG.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+        rSrc.connect(rBp); rBp.connect(rG); rG.connect(ac.destination);
+        rSrc.start(now + 0.05); rSrc.stop(now + 0.4);
+      } catch (e) { /* audio blocked */ }
+    }
+
+    // ── Open modal ─────────────────────────────────────────
+    function openModal(title, icon, tag, desc, tagsStr) {
+      document.getElementById('mIcon').textContent = icon;
+      document.getElementById('mTitle').innerHTML = title;
+      document.getElementById('mTag').innerHTML = tag;
+      document.getElementById('mDesc').textContent = desc;
+      const tagsEl = document.getElementById('mTags');
+      tagsEl.innerHTML = tagsStr.split(',').map(t => `<span>${t.trim()}</span>`).join('');
+      // Reset canvas
+      const c = document.getElementById('burnCanvas');
+      c.style.display = 'none';
+      c.getContext('2d').clearRect(0, 0, c.width, c.height);
+      // Re-trigger float-in animation each time
+      const box = document.getElementById('modalBox');
+      box.style.animation = 'none';
+      box.offsetWidth; // reflow
+      box.style.animation = '';
+      // Show overlay & play sound
+      document.getElementById('skillModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      playOpenSound();
+    }
+
+    // ── Immediate close (after burn finishes) ───────────────
+    function closeModalNow() {
+      document.getElementById('skillModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // ── Backdrop click ──────────────────────────────────────
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('skillModal')) triggerBurn();
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') triggerBurn(); });
+    document.getElementById('burnBtn').addEventListener('click', triggerBurn);
+
+    // ── Web Audio crackling fire sound ──────────────────────
+    function playBurnSound() {
+      try {
+        const ac = new (window.AudioContext || window.webkitAudioContext)();
+        // Resume in case browser suspended it
+        if (ac.state === 'suspended') ac.resume();
+        const now = ac.currentTime;
+        const dur = 2.4;
+
+        // — Ignition "whomp" at the very start —
+        const whompBuf = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.18), ac.sampleRate);
+        const wd = whompBuf.getChannelData(0);
+        for (let i = 0; i < wd.length; i++)
+          wd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / wd.length, 0.4);
+        const whompSrc = ac.createBufferSource(); whompSrc.buffer = whompBuf;
+        const whompLp = ac.createBiquadFilter(); whompLp.type = 'lowpass'; whompLp.frequency.value = 300;
+        const whompG = ac.createGain(); whompG.gain.setValueAtTime(1.2, now);
+        whompG.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        whompSrc.connect(whompLp); whompLp.connect(whompG); whompG.connect(ac.destination);
+        whompSrc.start(now); whompSrc.stop(now + 0.2);
+
+        // — Roaring base fire (low-pass white noise) —
+        const roarLen = Math.floor(ac.sampleRate * dur);
+        const roarBuf = ac.createBuffer(1, roarLen, ac.sampleRate);
+        const rd = roarBuf.getChannelData(0);
+        for (let i = 0; i < roarLen; i++) rd[i] = Math.random() * 2 - 1;
+        const roarSrc = ac.createBufferSource(); roarSrc.buffer = roarBuf;
+        const roarLp = ac.createBiquadFilter(); roarLp.type = 'lowpass'; roarLp.frequency.value = 900;
+        const roarG = ac.createGain();
+        roarG.gain.setValueAtTime(0.0, now);
+        roarG.gain.linearRampToValueAtTime(0.55, now + 0.25);
+        roarG.gain.linearRampToValueAtTime(0.45, now + 1.0);
+        roarG.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        roarSrc.connect(roarLp); roarLp.connect(roarG); roarG.connect(ac.destination);
+        roarSrc.start(now); roarSrc.stop(now + dur);
+
+        // — Mid crackle layer (band-pass noise) —
+        const midBuf = ac.createBuffer(1, roarLen, ac.sampleRate);
+        const md = midBuf.getChannelData(0);
+        for (let i = 0; i < roarLen; i++) md[i] = Math.random() * 2 - 1;
+        const midSrc = ac.createBufferSource(); midSrc.buffer = midBuf;
+        const midBp = ac.createBiquadFilter(); midBp.type = 'bandpass'; midBp.frequency.value = 2200; midBp.Q.value = 0.8;
+        const midG = ac.createGain();
+        midG.gain.setValueAtTime(0.0, now);
+        midG.gain.linearRampToValueAtTime(0.38, now + 0.2);
+        midG.gain.exponentialRampToValueAtTime(0.001, now + dur);
+        midSrc.connect(midBp); midBp.connect(midG); midG.connect(ac.destination);
+        midSrc.start(now); midSrc.stop(now + dur);
+
+        // — Sharp crackle bursts (paper fibres snapping) —
+        function crackle(t, freq, len, vol) {
+          const cLen = Math.floor(ac.sampleRate * len);
+          const cBuf = ac.createBuffer(1, cLen, ac.sampleRate);
+          const cd = cBuf.getChannelData(0);
+          for (let i = 0; i < cLen; i++)
+            cd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / cLen, 0.9);
+          const cs = ac.createBufferSource(); cs.buffer = cBuf;
+          const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = freq; bp.Q.value = 3;
+          const cg = ac.createGain();
+          cg.gain.setValueAtTime(vol, t);
+          cg.gain.exponentialRampToValueAtTime(0.001, t + len);
+          cs.connect(bp); bp.connect(cg); cg.connect(ac.destination);
+          cs.start(t); cs.stop(t + len + 0.01);
+        }
+
+        // Dense burst of crackles across the full burn duration
+        let t = now + 0.05;
+        while (t < now + dur - 0.05) {
+          crackle(t, 1200 + Math.random() * 4000, 0.03 + Math.random() * 0.12, 0.7 + Math.random() * 0.6);
+          t += 0.04 + Math.random() * 0.10;
+        }
+      } catch (e) { /* audio blocked by browser policy */ }
+    }
+
+    // ── Burns-to-Ashes animation ────────────────────────────
+    let burning = false;
+    function triggerBurn() {
+      if (burning) return;
+      burning = true;
+      playBurnSound();
+
+      const box = document.getElementById('modalBox');
+      const canvas = document.getElementById('burnCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const W = box.offsetWidth;
+      const H = box.offsetHeight;
+      canvas.width = W;
+      canvas.height = H;
+      canvas.style.display = 'block';
+
+      // ── Fire front columns ──────────────────────────────
+      const COL_W = 3;
+      const COLS = Math.ceil(W / COL_W);
+      // Start from bottom; random stagger so edges ignite first
+      const fireY = Array.from({ length: COLS }, (_, c) => {
+        const edgeBias = Math.min(c, COLS - 1 - c) / (COLS * 0.4);
+        return H + 10 + Math.min(edgeBias, 1) * 40 + Math.random() * 20;
+      });
+      const colSpeed = fireY.map(() => 6.5 + Math.random() * 4.5);
+
+      // ── Ash particle pool ───────────────────────────────
+      const ash = [];
+      function spawnAsh(x, y) {
+        const count = Math.random() < 0.3 ? 2 : 1;
+        for (let i = 0; i < count; i++) {
+          ash.push({
+            x: x + (Math.random() - 0.5) * COL_W * 3,
+            y,
+            vx: (Math.random() - 0.5) * 1.4,
+            vy: -(0.4 + Math.random() * 1.2),  // rise briefly then fall
+            size: 0.8 + Math.random() * 2.2,
+            alpha: 0.75 + Math.random() * 0.25,
+            fade: 0.025 + Math.random() * 0.02,
+            gray: 28 + Math.floor(Math.random() * 55),
+            wobble: Math.random() * Math.PI * 2,
+            wobbleSpd: 0.06 + Math.random() * 0.08,
+          });
+        }
+      }
+
+      // ── Embers (glowing orange flakes that rise) ────────
+      const embers = [];
+      function spawnEmber(x, y) {
+        if (Math.random() > 0.18) return;
+        embers.push({
+          x: x + (Math.random() - 0.5) * 10,
+          y,
+          vx: (Math.random() - 0.5) * 1.6,
+          vy: -(1.5 + Math.random() * 2.5),
+          size: 0.8 + Math.random() * 1.5,
+          alpha: 0.9,
+          fade: 0.018 + Math.random() * 0.02,
+          hue: 20 + Math.random() * 35,
+        });
+      }
+
+      let frameCount = 0;
+      function frame() {
+        frameCount++;
+        ctx.clearRect(0, 0, W, H);
+
+        // ── Advance fire & draw ─────────────────────────
+        let burnedCols = 0;
+        for (let c = 0; c < COLS; c++) {
+          fireY[c] -= colSpeed[c] + (Math.random() - 0.5) * 1.8;
+          if (fireY[c] < -50) { burnedCols++; continue; }
+
+          const x = c * COL_W;
+          const y = fireY[c];
+
+          // Black char below fire line
+          ctx.fillStyle = 'rgba(5,1,0,0.98)';
+          ctx.fillRect(x, y + 14, COL_W, Math.max(0, H - y + 20));
+
+          // Fire gradient
+          const fg = ctx.createLinearGradient(x, y - 32, x, y + 16);
+          fg.addColorStop(0, 'rgba(255,240,100,0)');
+          fg.addColorStop(0.18, 'rgba(255,190,10,0.9)');
+          fg.addColorStop(0.45, 'rgba(255,55,0,1)');
+          fg.addColorStop(0.75, 'rgba(35,6,0,0.95)');
+          fg.addColorStop(1, 'rgba(5,1,0,0.98)');
+          ctx.fillStyle = fg;
+          ctx.fillRect(x, y - 32, COL_W, 48);
+
+          // Spawn ash & embers from fire line
+          if (frameCount % 2 === 0) spawnAsh(x, y + 14);
+          spawnEmber(x + COL_W / 2, y - 10);
+        }
+
+        // ── Draw + update ash particles ─────────────────
+        for (let i = ash.length - 1; i >= 0; i--) {
+          const p = ash[i];
+          p.wobble += p.wobbleSpd;
+          p.x += p.vx + Math.sin(p.wobble) * 0.35;
+          p.y += p.vy;
+          p.vy += 0.07;   // gravity pulls down
+          p.alpha -= p.fade;
+          if (p.alpha <= 0 || p.y > H + 40) { ash.splice(i, 1); continue; }
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = `rgb(${p.gray},${Math.max(0, p.gray - 12)},${Math.max(0, p.gray - 18)})`;
+          ctx.beginPath();
+          ctx.ellipse(p.x, p.y, p.size, p.size * 0.55, p.wobble, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // ── Draw + update embers ────────────────────────
+        for (let i = embers.length - 1; i >= 0; i--) {
+          const e = embers[i];
+          e.x += e.vx + (Math.random() - 0.5) * 0.6;
+          e.y += e.vy;
+          e.vy += 0.04;
+          e.alpha -= e.fade;
+          if (e.alpha <= 0 || e.y < -20) { embers.splice(i, 1); continue; }
+          ctx.globalAlpha = e.alpha;
+          ctx.fillStyle = `hsl(${e.hue},100%,60%)`;
+          ctx.beginPath();
+          ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // ── Close the moment paper is fully charred ────────
+        if (burnedCols === COLS) {
+          burning = false;
+          box.style.transform = '';
+          closeModalNow();
+          return;
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+  </script>
 </body>
 
 </html>
