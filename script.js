@@ -206,6 +206,11 @@ async function fetchGitHubProjects() {
     }
 }
 
+// Live GitHub Pages deployments — add more repo names here as you deploy them
+const livePages = {
+    'College-Details_website': 'https://nandan0402.github.io/College-Details_website/',
+};
+
 function renderProjects(repos) {
     const container = document.getElementById('github-projects');
     container.innerHTML = '';
@@ -215,6 +220,8 @@ function renderProjects(repos) {
         card.className = 'project-card';
 
         const imageUrl = `https://opengraph.githubassets.com/1/${repo.full_name}`;
+        const projectUrl = livePages[repo.name] || repo.html_url;
+        const btnLabel = livePages[repo.name] ? 'Live Demo 🔥' : 'View Project 🔥';
 
         card.innerHTML = `
       <img src="${imageUrl}" alt="${repo.name} Preview">
@@ -225,16 +232,55 @@ function renderProjects(repos) {
           <span>⭐ ${repo.stargazers_count}</span>
           <span>${repo.language || 'Code'}</span>
         </div>
-        <a href="${repo.html_url}" target="_blank">View Project 🔥</a>
+        <a href="${projectUrl}" target="_blank">${btnLabel}</a>
       </div>
     `;
         container.appendChild(card);
     });
-
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchGitHubStats();
     fetchGitHubProjects();
+
+    // Attach click sound to interactive elements globally
+    const interactiveElements = document.querySelectorAll('a, button, .cert-card, .logo');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mousedown', playClickSound);
+    });
 });
+
+// ═══════════════════════════════════════════════════════
+//  🔊 UI Interaction Sounds
+// ═══════════════════════════════════════════════════════
+let audioCtx = null;
+
+function playClickSound() {
+    try {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        // Short, punchy "tick" sound suitable for a modern UI
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.07);
+
+        gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.07);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.07);
+    } catch (e) {
+        console.warn("Audio play failed:", e);
+    }
+}

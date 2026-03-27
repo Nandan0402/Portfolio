@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Nandan — Fire Legend Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nandan — Fire Legend Portfolio</title>
   <meta name="description"
-    content="Nandan B — Full Stack Developer, AI Enthusiast & Founder of Docustore. Fire Legend Portfolio." />
+    content="Nandan B — Full Stack Developer, AI Enthusiast and Founder of Docustore. Blazing fast, beautifully designed web applications." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
@@ -19,7 +19,6 @@
       --fire-orange: #ff6b2b;
       --fire-amber: #ff9d00;
       --fire-gold: #ffd000;
-      --fire-glow: rgba(255, 100, 0, 0.5);
       --dark-bg: #060200;
       --card-bg: rgba(255, 80, 0, 0.06);
       --card-border: rgba(255, 120, 0, 0.25);
@@ -45,7 +44,6 @@
       overflow-x: hidden;
     }
 
-    /* ── Canvas ── */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -55,7 +53,7 @@
       z-index: -1;
     }
 
-    /* ══ HEADER ══════════════════════════════════════════ */
+    /* ── Header ── */
     header {
       display: flex;
       justify-content: space-between;
@@ -74,11 +72,10 @@
       font-family: 'Cinzel', serif;
       font-size: 26px;
       font-weight: 900;
+      letter-spacing: 2px;
       background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: none;
-      letter-spacing: 2px;
     }
 
     nav {
@@ -91,8 +88,7 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 15px;
-      letter-spacing: 0.5px;
-      transition: color 0.3s, text-shadow 0.3s;
+      transition: color 0.3s;
       position: relative;
     }
 
@@ -116,187 +112,154 @@
       width: 100%;
     }
 
-    /* ══ HERO ════════════════════════════════════════════ */
+    /* ── Hero Section ── */
     .hero {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      gap: 60px;
-      padding: 90px 8%;
-      min-height: 88vh;
+      justify-content: space-between;
+      padding: 80px 8% 60px;
+      gap: 50px;
     }
 
     .hero-text {
-      max-width: 520px;
+      flex: 1;
+      max-width: 580px;
     }
 
-    .hero-text .eyebrow {
-      font-size: 13px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--fire-orange);
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .hero-text h2 {
+    .hero-text h1 {
       font-family: 'Cinzel', serif;
-      font-size: 58px;
+      font-size: 52px;
       font-weight: 900;
+      letter-spacing: 3px;
       margin: 0 0 6px;
-      line-height: 1.05;
-      background: linear-gradient(135deg, #fff 20%, var(--fire-gold) 60%, var(--fire-orange));
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-text h3 {
+    .hero-text .subtitle {
       font-size: 22px;
-      font-weight: 400;
-      color: var(--fire-amber);
-      margin: 0 0 20px;
-      text-shadow: 0 0 20px rgba(255, 157, 0, 0.6);
+      font-weight: 700;
+      color: var(--fire-orange);
+      margin-bottom: 20px;
     }
 
-    .hero-text p {
-      color: var(--text-muted);
+    .hero-text .description {
       font-size: 16px;
       line-height: 1.8;
+      color: var(--text-muted);
       margin-bottom: 30px;
     }
 
-    /* CTA buttons */
-    .cta-group {
+    /* ── CTA Buttons ── */
+    .cta-buttons {
       display: flex;
       gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
-    .btn-fire {
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
       background: linear-gradient(135deg, var(--fire-red), var(--fire-orange), var(--fire-amber));
       color: #fff;
-      box-shadow: 0 0 24px rgba(255, 80, 0, 0.5), 0 4px 15px rgba(0, 0, 0, 0.4);
-      transition: transform 0.2s, box-shadow 0.3s;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 0 24px rgba(255, 80, 0, 0.45);
+      transition: transform 0.25s, box-shadow 0.3s;
     }
 
-    .btn-fire:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 0 40px rgba(255, 100, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.5);
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(255, 100, 0, 0.7);
     }
 
-    .btn-outline {
+    .btn-secondary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-weight: 700;
+      padding: 14px 30px;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
       font-size: 15px;
-      text-decoration: none;
-      background: transparent;
-      color: var(--fire-gold);
-      border: 1px solid var(--fire-amber);
-      box-shadow: 0 0 12px rgba(255, 157, 0, 0.15);
-      transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 157, 0, 0.08);
-      box-shadow: 0 0 24px rgba(255, 157, 0, 0.4);
-      transform: translateY(-3px);
-    }
-
-    /* Socials */
-    .socials {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .socials a {
-      color: var(--text-muted);
-      font-size: 22px;
-      transition: color 0.3s, text-shadow 0.3s, transform 0.2s;
-    }
-
-    .socials a:hover {
-      color: var(--fire-gold);
-      text-shadow: 0 0 14px var(--fire-gold);
-      transform: scale(1.2);
-    }
-
-    .docustore-link {
-      text-decoration: none;
-      color: var(--fire-orange) !important;
       font-weight: 700;
-      font-size: 15px !important;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 24px rgba(255, 100, 0, 0.3);
+      border-color: rgba(255, 157, 0, 0.5);
+    }
+
+    /* ── Social Chips ── */
+    .social-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .social-chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      border: 1px solid rgba(255, 107, 43, 0.4);
-      padding: 4px 12px;
-      border-radius: 20px;
-      transition: background 0.3s, box-shadow 0.3s !important;
+      padding: 7px 16px;
+      border-radius: 30px;
+      background: rgba(255, 100, 0, 0.1);
+      border: 1px solid rgba(255, 120, 0, 0.3);
+      color: var(--fire-amber);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
-    .docustore-link:hover {
-      background: rgba(255, 107, 43, 0.1);
-      box-shadow: 0 0 16px rgba(255, 107, 43, 0.4) !important;
+    .social-chip:hover {
+      background: rgba(255, 100, 0, 0.22);
+      box-shadow: 0 0 16px rgba(255, 100, 0, 0.3);
     }
 
-    /* ── Profile Image ── */
-    .hero-img {
+    .social-chip i {
+      font-size: 14px;
+    }
+
+    /* ── Hero Image ── */
+    .hero-image {
+      flex-shrink: 0;
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    .fire-ring {
+    .hero-image .img-ring {
       position: relative;
-      width: 300px;
-      height: 300px;
-    }
-
-    .fire-ring::before,
-    .fire-ring::after {
-      content: '';
-      position: absolute;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
+      background: conic-gradient(var(--fire-red), var(--fire-orange), var(--fire-amber), var(--fire-gold), var(--fire-orange), var(--fire-red));
+      padding: 6px;
     }
 
-    .fire-ring::before {
-      inset: -12px;
-      background: conic-gradient(from 0deg,
-          var(--fire-red),
-          var(--fire-orange),
-          var(--fire-gold),
-          var(--fire-amber),
-          var(--fire-orange),
-          var(--fire-red));
-      animation: spin-fire 3s linear infinite;
-      filter: blur(4px);
-      opacity: 0.9;
+    .hero-image .img-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--dark-bg);
     }
 
-    .fire-ring::after {
-      inset: 2px;
-      background: var(--dark-bg);
-      z-index: 1;
-    }
-
-    @keyframes spin-fire {
+    @keyframes spinRing {
       0% {
         transform: rotate(0deg);
       }
@@ -306,201 +269,271 @@
       }
     }
 
-    .fire-ring img {
+    /* Glow behind the ring */
+    .hero-image::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
       border-radius: 50%;
-      object-fit: cover;
-      z-index: 2;
-      border: 4px solid rgba(255, 100, 0, 0.4);
-      box-shadow: 0 0 50px rgba(255, 80, 0, 0.7), inset 0 0 30px rgba(255, 100, 0, 0.1);
+      background: radial-gradient(circle, rgba(255, 100, 0, 0.25) 0%, transparent 70%);
+      z-index: -1;
+      animation: pulseGlow 3s ease-in-out infinite alternate;
     }
 
-    /* ══ STATS ═══════════════════════════════════════════ */
-    .stats {
+    @keyframes pulseGlow {
+      0% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
+
+    /* ── Stats Section ── */
+    .stats-section {
+      padding: 40px 8% 70px;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      padding: 50px 8%;
-      background: rgba(255, 60, 0, 0.03);
-      border-top: 1px solid rgba(255, 100, 0, 0.12);
-      border-bottom: 1px solid rgba(255, 100, 0, 0.12);
     }
 
-    .stat-box {
-      min-width: 130px;
-      text-align: center;
+    .stats-grid {
+      display: flex;
+      gap: 0;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(8px);
-      border-radius: 16px;
-      padding: 24px 20px;
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 18px;
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.08), 0 8px 30px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
     }
 
-    .stat-box:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 0 30px rgba(255, 100, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.4);
+    .stat-item {
+      padding: 32px 40px;
+      text-align: center;
+      position: relative;
+      transition: background 0.3s;
     }
 
-    .stat-box h2 {
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: var(--card-border);
+    }
+
+    .stat-item:hover {
+      background: rgba(255, 100, 0, 0.08);
+    }
+
+    .stat-number {
       font-family: 'Cinzel', serif;
-      font-size: 32px;
-      margin: 0 0 6px;
+      font-size: 36px;
+      font-weight: 900;
       background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: none;
+      line-height: 1;
     }
 
-    .stat-box p {
-      color: var(--text-muted);
-      margin: 0;
+    .stat-label {
       font-size: 13px;
-      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 600;
     }
 
-    /* ══ RESPONSIVE ══════════════════════════════════════ */
+    /* ── Footer ── */
+    footer {
+      background: rgba(6, 2, 0, 0.8);
+      text-align: center;
+      padding: 22px;
+      margin-top: 0;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 100, 0, 0.15);
+      font-size: 14px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 50px 6%;
+      }
+
+      .hero-text {
+        max-width: 100%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero-text h1 {
+        font-size: 36px;
+      }
+
+      .cta-buttons {
+        justify-content: center;
+      }
+
+      .social-chips {
+        justify-content: center;
+      }
+
+      .hero-image .img-ring {
+        width: 240px;
+        height: 240px;
+      }
+
+      .stats-grid {
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        padding: 24px 28px;
+        flex: 1 1 auto;
+        min-width: 120px;
+      }
+
+      .stat-item:not(:last-child)::after {
+        display: none;
+      }
+    }
+
     @media (max-width: 768px) {
       header {
         padding: 14px 20px;
-      }
-
-      .logo {
-        font-size: 20px;
-      }
-
-      nav {
-        gap: 14px;
-      }
-
-      nav a {
-        font-size: 13px;
-      }
-
-      .hero {
-        padding: 60px 6%;
-        gap: 40px;
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-
-      .hero-text h2 {
-        font-size: 38px;
-      }
-
-      .fire-ring {
-        width: 220px;
-        height: 220px;
-      }
-
-      .cta-group {
-        justify-content: center;
-      }
-
-      .socials {
-        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
       nav {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 28px;
+      }
+
+      .hero-text .subtitle {
+        font-size: 17px;
+      }
+
+      .hero-image .img-ring {
+        width: 200px;
+        height: 200px;
+      }
+
+      .stat-number {
+        font-size: 26px;
+      }
+
+      .stat-item {
+        padding: 18px 16px;
       }
     }
   </style>
 </head>
 
 <body>
-
   <canvas id="bg-canvas"></canvas>
 
   <header>
-    <span class="logo">Nandan</span>
+    <span class="logo">NANDAN</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
       <a href="robotics and sensors projects.html">Robotics and Sensors projects</a>
-      <a href="certificates/">Certificates</a>
+      <a href="certificates.html">Certificates</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
     <div class="hero-text">
-      <span class="eyebrow">⚔️ Full Stack Developer &amp; AI Enthusiast</span>
-      <h2>Nandan B</h2>
-      <h3>Founder of Docustore</h3>
-      <p>
+      <h1>NANDAN B</h1>
+      <p class="subtitle">Founder of Docustore</p>
+      <p class="description">
         I forge modern web applications from code and creativity — blazing fast,
-        beautifully designed, and built to make an impact. Specializing in
-        AI, Full Stack development, and turning bold ideas into reality.
+        beautifully designed, and built to make an impact. Specializing in AI, Full
+        Stack development, and turning bold ideas into reality.
       </p>
 
-      <div class="cta-group">
-        <a href="projects.html" class="btn-fire"><i class="fas fa-fire"></i> See My Work</a>
-        <a href="contact.html" class="btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
+      <div class="cta-buttons">
+        <a href="projects.html" class="btn-primary">🔥 See My Work</a>
+        <a href="contact.html" class="btn-secondary">✈ Contact Me</a>
       </div>
 
-      <div class="socials">
-        <a href="https://github.com/Nandan0402" title="GitHub" target="_blank" class="docustore-link"><i
-            class="fab fa-github"></i> GitHub</a>
-        <a href="https://www.linkedin.com/in/nandan-b-2a9b1b334/" title="LinkedIn" target="_blank"
-          class="docustore-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="mailto:nandanb449@gmail.com" title="Email" class="docustore-link"><i class="fas fa-envelope"></i>
-          Email</a>
-        <a href="https://www.instagram.com/nandxn.fit/?hl=en" title="Personal Instagram" target="_blank"
-          class="docustore-link">
+      <div class="social-chips">
+        <a href="https://github.com/Nandan0402" target="_blank" class="social-chip">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/nandan-b-2a9b1b334/" target="_blank" class="social-chip">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="mailto:nandanb449@gmail.com" class="social-chip">
+          <i class="fas fa-envelope"></i> Email
+        </a>
+        <a href="https://www.instagram.com/nandxn.fit/?hl=en" target="_blank" class="social-chip">
           <i class="fab fa-instagram"></i> Personal
         </a>
-        <a href="https://www.instagram.com/docu__store/?hl=en" title="Startup Instagram" target="_blank"
-          class="docustore-link">
+        <a href="https://www.instagram.com/docu__store/?hl=en" target="_blank" class="social-chip">
           <i class="fab fa-instagram"></i> Startup
         </a>
-        <a href="https://docustore-frontend.onrender.com" target="_blank" class="docustore-link" title="Application">
-          <i class="fas fa-desktop"></i> App
-        </a>
-        <a href="https://docustore-website.onrender.com" target="_blank" class="docustore-link" title="Website">
-          <i class="fas fa-globe"></i> Site
-        </a>
       </div>
     </div>
 
-    <div class="hero-img">
-      <div class="fire-ring">
-        <img src="profile.jpg" alt="Nandan's Photo">
+    <div class="hero-image">
+      <div class="img-ring">
+        <img src="profile.jpg" alt="Nandan B" />
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <section class="stats">
-    <div class="stat-box">
-      <h2>1+</h2>
-      <p>Years Experience</p>
-    </div>
-    <div class="stat-box">
-      <h2 id="project-count">—</h2>
-      <p>Projects Completed</p>
-    </div>
-    <div class="stat-box">
-      <h2 id="follower-count">—</h2>
-      <p>GitHub Followers</p>
-    </div>
-    <div class="stat-box">
-      <h2 id="insta-count">—</h2>
-      <p>Instagram</p>
-    </div>
-    <div class="stat-box">
-      <h2 id="linkedin-count">—</h2>
-      <p>LinkedIn</p>
+  <!-- ═══ STATS ═══ -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">1+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="project-count">56+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="follower-count">2+</div>
+        <div class="stat-label">GitHub Followers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="insta-count">150+</div>
+        <div class="stat-label">Instagram</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="linkedin-count">250+</div>
+        <div class="stat-label">LinkedIn</div>
+      </div>
     </div>
   </section>
+
+  <footer>
+    <p>© 2025 Nandan · Forged with 🔥</p>
+  </footer>
 
   <script src="script.js" defer></script>
 </body>

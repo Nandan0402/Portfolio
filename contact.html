@@ -194,6 +194,140 @@
       color: var(--text-muted);
     }
 
+    /* ── Feedback Form ── */
+    .feedback-section {
+      margin-top: 70px;
+      margin-bottom: 60px;
+    }
+
+    .feedback-section h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feedback-section .sub {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    .feedback-form {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(14px);
+      border-radius: 22px;
+      padding: 50px 52px;
+      max-width: 750px;
+      margin: 0 auto;
+      box-shadow: 0 0 50px rgba(255, 80, 0, 0.1), 0 10px 40px rgba(0,0,0,0.4);
+      text-align: left;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fire-amber);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255, 80, 0, 0.05);
+      border: 1px solid rgba(255, 120, 0, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--fire-orange);
+      box-shadow: 0 0 16px rgba(255, 107, 43, 0.25);
+    }
+
+    .form-group select option {
+      background: #1a0800;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--fire-red), var(--fire-orange), var(--fire-amber));
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 24px rgba(255, 80, 0, 0.45);
+      transition: transform 0.2s, box-shadow 0.3s;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(255, 100, 0, 0.7);
+    }
+
+    .form-msg {
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      display: none;
+      text-align: center;
+    }
+
+    .form-msg.success {
+      background: rgba(0, 200, 100, 0.12);
+      border: 1px solid rgba(0, 200, 100, 0.35);
+      color: #00e676;
+      display: block;
+    }
+
+    .form-msg.error {
+      background: rgba(255, 50, 0, 0.12);
+      border: 1px solid rgba(255, 50, 0, 0.35);
+      color: #ff6b6b;
+      display: block;
+    }
+
     footer {
       background: rgba(6, 2, 0, 0.8);
       text-align: center;
@@ -240,7 +374,7 @@
       <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
       <a href="robotics and sensors projects.html">Robotics and Sensors projects</a>
-      <a href="certificates/">Certificates</a>
+      <a href="certificates.html">Certificates</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -248,6 +382,51 @@
   <section id="contact">
     <h2>📬 Contact Me</h2>
     <p class="section-subtitle">Ready to forge something legendary together? Reach out.</p>
+
+    <!-- Message / Feedback Form -->
+    <div class="feedback-section">
+      <h3>📬 Get In Touch</h3>
+      <p class="sub">Feedback, questions, help, collab ideas — anything at all. Just fire it across!</p>
+
+      <form class="feedback-form" id="feedbackForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Your Name</label>
+            <input type="text" id="fname" name="name" placeholder="e.g. Arjun" required />
+          </div>
+          <div class="form-group">
+            <label for="femail">Your Email</label>
+            <input type="email" id="femail" name="email" placeholder="you@email.com" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ftype">Reason</label>
+          <select id="ftype" name="type" required>
+            <option value="" disabled selected>What's this about…</option>
+            <option value="General Feedback">💬 General Feedback</option>
+            <option value="Question">❓ Question</option>
+            <option value="Need Help">🤝 Need Help</option>
+            <option value="Collaboration">🤝 Collaboration Idea</option>
+            <option value="Project Inquiry">🚀 Project Inquiry</option>
+            <option value="Bug / Issue">🐛 Bug / Issue</option>
+            <option value="Just Saying Hi">👋 Just Saying Hi</option>
+            <option value="Other">✨ Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" name="message" placeholder="Type anything… I read every message!" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
 
     <div class="contact-grid">
 
@@ -301,6 +480,38 @@
   </footer>
 
   <script src="script.js" defer></script>
+  <script>
+    document.getElementById('feedbackForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-submit');
+      const msg = document.getElementById('formMsg');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+      msg.className = 'form-msg';
+
+      const data = new FormData(this);
+      try {
+        // Replace YOUR_FORM_ID below after signing up at https://formspree.io
+        const res = await fetch('https://formspree.io/f/xnjojary', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          msg.textContent = '🔥 Message sent! I\'ll get back to you soon.';
+          msg.className = 'form-msg success';
+          this.reset();
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        msg.textContent = '❌ Something went wrong. Try emailing me directly at nandanb449@gmail.com';
+        msg.className = 'form-msg error';
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Feedback';
+    });
+  </script>
 </body>
 
 </html>

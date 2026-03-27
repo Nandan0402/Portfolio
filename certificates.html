@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certificates — Nandan Fire Legend Portfolio</title>
+  <meta name="description" content="Nandan B's completed certificates and achievements." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --fire-red: #ff3a00;
+      --fire-orange: #ff6b2b;
+      --fire-amber: #ff9d00;
+      --fire-gold: #ffd000;
+      --dark-bg: #060200;
+      --card-bg: rgba(255, 80, 0, 0.06);
+      --card-border: rgba(255, 120, 0, 0.25);
+      --text-main: #fff5e6;
+      --text-muted: #c4a88a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: rgba(6, 2, 0, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--fire-gold);
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* ── Main Content ── */
+    main {
+      flex: 1;
+      padding: 80px 8%;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 50px;
+    }
+
+    /* ── Certificates Grid ── */
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cert-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 40px rgba(255, 100, 0, 0.25), 0 15px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 157, 0, 0.5);
+    }
+
+    .cert-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: top;
+      border-bottom: 1px solid rgba(255, 120, 0, 0.2);
+      transition: filter 0.3s;
+    }
+
+    .cert-card:hover .cert-image {
+      filter: brightness(1.1);
+    }
+
+    .cert-info {
+      padding: 24px;
+      text-align: left;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0 0 10px 0;
+    }
+
+    .cert-issuer {
+      font-size: 14px;
+      color: var(--fire-amber);
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .cert-desc {
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        flex: 1;
+    }
+
+    .view-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 0;
+      width: 100%;
+      background: rgba(255, 100, 0, 0.1);
+      border: 1px solid rgba(255, 120, 0, 0.3);
+      border-radius: 8px;
+      color: var(--fire-gold);
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.3s;
+      margin-top: auto;
+    }
+
+    .cert-card:hover .view-btn {
+      background: linear-gradient(135deg, var(--fire-red), var(--fire-orange));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(255, 80, 0, 0.4);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: rgba(6, 2, 0, 0.8);
+      text-align: center;
+      padding: 22px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 100, 0, 0.15);
+      font-size: 14px;
+    }
+
+
+    /* ── Modal for viewing full certificate ── */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90vh;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      border: 2px solid var(--fire-orange);
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(255, 100, 0, 0.3);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: var(--text-main);
+      font-size: 30px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-modal:hover {
+      color: var(--fire-red);
+    }
+
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <span class="logo">NANDAN</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="robotics and sensors projects.html">Robotics and Sensors projects</a>
+      <a href="certificates.html" class="active">Certificates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>📜 Certificates</h1>
+    <p class="subtitle">Proof of skill, forged through effort and learning.</p>
+
+    <div class="certificates-grid">
+      
+      <!-- CSS Certificate -->
+      <a href="#" class="cert-card" onclick="openModal('certificates/css-cert.png'); return false;">
+        <img src="certificates/css-cert.png" alt="CSS Certificate" class="cert-image">
+        <div class="cert-info">
+          <h3 class="cert-title">Cascading Style Sheets (CSS)</h3>
+
+          <p class="cert-desc">This certification is based on frontend development.</p>
+          <div class="view-btn">
+            <i class="fas fa-search-plus"></i> View Credential
+          </div>
+        </div>
+      </a>
+
+      <!-- MERN Stack Course Certificate -->
+      <a href="#" class="cert-card" onclick="openModal('certificates/mern-stack-cert.jpeg'); return false;">
+        <img src="certificates/mern-stack-cert.jpeg" alt="MERN Stack Course Certificate" class="cert-image">
+        <div class="cert-info">
+          <h3 class="cert-title">MERN Stack Course Completion</h3>
+          <p class="cert-issuer"><i class="fas fa-certificate"></i> GETSKILLED</p>
+          <p class="cert-desc">Verified certification of course completion in MERN Stack Web Development, demonstrating outstanding creativity, innovation, and technical contribution from Nov 2025 to Jan 2026.</p>
+          <div class="view-btn">
+            <i class="fas fa-search-plus"></i> View Credential
+          </div>
+        </div>
+      </a>
+
+      <!-- AI/ML Internship Certificate -->
+      <a href="#" class="cert-card" onclick="openModal('certificates/ai-ml-intern-cert.jpg'); return false;">
+        <img src="certificates/ai-ml-intern-cert.jpg" alt="AI/ML Internship Certificate" class="cert-image">
+        <div class="cert-info">
+          <h3 class="cert-title">AI/ML Internship</h3>
+          <p class="cert-issuer"><i class="fas fa-brain"></i> GETSKILLED / IIT Ropar</p>
+          <p class="cert-desc">Verified certification of internship completion as an AI/ML Intern, demonstrating technical excellence, creativity, and innovation from Sep to Dec 2025.</p>
+          <div class="view-btn">
+            <i class="fas fa-search-plus"></i> View Credential
+          </div>
+        </div>
+      </a>
+
+      <!-- AI & ML Course Certificate -->
+      <a href="#" class="cert-card" onclick="openModal('certificates/ai-ml-course-cert.jpg'); return false;">
+        <img src="certificates/ai-ml-course-cert.jpg" alt="AI & ML Course Certificate" class="cert-image">
+        <div class="cert-info">
+          <h3 class="cert-title">AI & ML Course Completion</h3>
+          <p class="cert-issuer"><i class="fas fa-microchip"></i> GETSKILLED / IIT Ropar</p>
+          <p class="cert-desc">Verified certification of course completion in AI & ML, backed by Samsung Research and Indian Institute of Technology, Ropar, demonstrating exceptional contribution and dedication from Sep to Dec 2025.</p>
+          <div class="view-btn">
+            <i class="fas fa-search-plus"></i> View Credential
+          </div>
+        </div>
+      </a>
+
+      <!-- 
+        Add more certificates here in the future
+      -->
+
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <i class="fas fa-times close-modal" onclick="closeModal()"></i>
+      <img id="modalImg" src="" alt="Full Certificate">
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Nandan · Forged with 🔥</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+  
+  <script>
+    // Modal script for viewing certificates
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      modalImg.src = imageSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        document.getElementById('modalImg').src = '';
+      }, 300);
+    }
+    
+    // Close modal on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+
+</html>
