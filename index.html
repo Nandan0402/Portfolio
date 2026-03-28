@@ -132,9 +132,17 @@
       font-weight: 900;
       letter-spacing: 3px;
       margin: 0 0 6px;
-      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red), var(--fire-gold));
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: fireTextGlow 5s ease infinite alternate;
+    }
+
+    @keyframes fireTextGlow {
+      0% { background-position: 0% 50%; text-shadow: 0 0 5px rgba(255,100,0,0.1); }
+      50% { background-position: 100% 50%; text-shadow: 0 0 25px rgba(255,150,0,0.6); }
+      100% { background-position: 0% 50%; text-shadow: 0 0 5px rgba(255,100,0,0.1); }
     }
 
     .hero-text .subtitle {
@@ -236,10 +244,18 @@
       font-size: 14px;
     }
 
+    /* ── Float Animation ── */
+    @keyframes floatHero {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
     /* ── Hero Image ── */
     .hero-image {
       flex-shrink: 0;
       position: relative;
+      animation: floatHero 4s ease-in-out infinite;
     }
 
     .hero-image .img-ring {
@@ -477,6 +493,8 @@
       <div class="cta-buttons">
         <a href="projects.html" class="btn-primary">🔥 See My Work</a>
         <a href="contact.html" class="btn-secondary">✈ Contact Me</a>
+        <a href="Nandan_Resume.pdf" class="btn-secondary" download>📄 Resume</a>
+        <a href="Nandan_CV.pdf" class="btn-secondary" download>📄 CV</a>
       </div>
 
       <div class="social-chips">
