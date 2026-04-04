@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nandan — Fire Legend Portfolio</title>
   <meta name="description"
-    content="Nandan B — Full Stack Developer, AI Enthusiast and Founder of Docustore. Blazing fast, beautifully designed web applications." />
+    content="Nandan B — Full Stack Developer and Startup Founder. Proven MERN expertise with 50+ projects, a deployed product (Docustore), and multiple ongoing startups." />
+  <link rel="icon" href="profile.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
@@ -75,6 +76,7 @@
       letter-spacing: 2px;
       background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -135,6 +137,7 @@
       background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red), var(--fire-gold));
       background-size: 300% 300%;
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: fireTextGlow 5s ease infinite alternate;
     }
@@ -162,6 +165,7 @@
     /* ── CTA Buttons ── */
     .cta-buttons {
       display: flex;
+      flex-wrap: wrap;
       gap: 16px;
       margin-bottom: 28px;
     }
@@ -169,6 +173,7 @@
     .btn-primary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       padding: 14px 30px;
       border: none;
@@ -192,6 +197,7 @@
     .btn-secondary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       padding: 14px 30px;
       border: 1px solid var(--card-border);
@@ -355,6 +361,7 @@
       font-weight: 900;
       background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       line-height: 1;
     }
@@ -439,6 +446,16 @@
     }
 
     @media (max-width: 480px) {
+      .cta-buttons {
+        gap: 12px;
+      }
+
+      .btn-primary, .btn-secondary {
+        padding: 12px 14px;
+        font-size: 14px;
+        flex: 1 1 calc(50% - 12px);
+      }
+
       .hero-text h1 {
         font-size: 28px;
       }
@@ -473,7 +490,9 @@
       <a href="about.html">About</a>
       <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
-      <a href="robotics and sensors projects.html">Robotics and Sensors projects</a>
+      <a href="startups.html">Startups</a>
+      <a href="consultation.html">Training</a>
+      <a href="robotics and sensors projects.html">Robotics & Sensors</a>
       <a href="certificates.html">Certificates</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -485,16 +504,15 @@
       <h1>NANDAN B</h1>
       <p class="subtitle">Founder of Docustore</p>
       <p class="description">
-        I forge modern web applications from code and creativity — blazing fast,
-        beautifully designed, and built to make an impact. Specializing in AI, Full
-        Stack development, and turning bold ideas into reality.
+        I forge scalable web applications with MERN stack expertise and an entrepreneurial drive. With 50+ 
+        completed projects, a deployed product (Docustore), and three ongoing startups (CoreVantra ERP, 
+        FitVantra, CleanEco), I turn bold ideas into high-impact, real-world solutions.
       </p>
 
       <div class="cta-buttons">
         <a href="projects.html" class="btn-primary">🔥 See My Work</a>
         <a href="contact.html" class="btn-secondary">✈ Contact Me</a>
         <a href="Nandan_Resume.pdf" class="btn-secondary" download>📄 Resume</a>
-        <a href="Nandan_CV.pdf" class="btn-secondary" download>📄 CV</a>
       </div>
 
       <div class="social-chips">

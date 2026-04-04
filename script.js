@@ -242,13 +242,146 @@ function renderProjects(repos) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchGitHubStats();
     fetchGitHubProjects();
+    setupMobileMenu();
 
     // Attach click sound to interactive elements globally
-    const interactiveElements = document.querySelectorAll('a, button, .cert-card, .logo');
+    const interactiveElements = document.querySelectorAll('a, button, .cert-card, .logo, .mobile-menu-btn');
     interactiveElements.forEach(el => {
         el.addEventListener('mousedown', playClickSound);
     });
 });
+
+// ═══════════════════════════════════════════════════════
+//  📱 Mobile Menu Setup
+// ═══════════════════════════════════════════════════════
+function setupMobileMenu() {
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    
+    if (header && nav) {
+        // Create menu button
+        const menuBtn = document.createElement('div');
+        menuBtn.className = 'mobile-menu-btn';
+        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        
+        // Insert it into header after logo
+        // Insert it into header before logo
+        const logo = header.querySelector('.logo');
+        if (logo) {
+            logo.before(menuBtn);
+        } else {
+            header.insertBefore(menuBtn, nav);
+        }
+
+        // Add dynamic CSS
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .mobile-menu-btn {
+                display: none;
+                color: var(--fire-gold);
+                font-size: 24px;
+                cursor: pointer;
+                z-index: 1000;
+                transition: transform 0.3s;
+                padding: 5px;
+            }
+            .mobile-menu-btn:hover {
+                transform: scale(1.1);
+                color: var(--fire-amber);
+            }
+            @media (max-width: 768px) {
+                header {
+                    justify-content: flex-start !important;
+                    flex-wrap: nowrap !important;
+                    gap: 20px !important;
+                }
+                .mobile-menu-btn {
+                    display: block;
+                    z-index: 1001;
+                    position: relative;
+                }
+                nav {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    position: fixed;
+                    top: 0;
+                    left: -280px;
+                    width: 250px;
+                    height: 100vh;
+                    background: rgba(6, 2, 0, 0.98);
+                    border-right: 2px solid var(--fire-amber);
+                    border-bottom: none;
+                    padding: 80px 20px 30px;
+                    max-height: none;
+                    overflow-y: auto;
+                    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    gap: 10px !important;
+                    box-shadow: none;
+                    z-index: 1000;
+                }
+                nav.active {
+                    left: 0;
+                    box-shadow: 20px 0 50px rgba(0,0,0,0.9);
+                    padding-top: 80px;
+                }
+                nav a {
+                    width: 100%;
+                    padding: 12px 15px;
+                    text-align: left;
+                    font-size: 16px !important;
+                    border-bottom: 1px solid rgba(255,100,0,0.1);
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                }
+                nav a:last-child {
+                    border-bottom: none;
+                }
+                nav a::after {
+                    display: none; /* Hide standard underline */
+                }
+                nav a:hover, nav a.active {
+                    background: rgba(255, 100, 0, 0.15);
+                    color: var(--fire-gold);
+                    transform: translateX(6px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Toggle logic
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nav.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if(nav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            // Sound is handled by mousedown global
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if(!header.contains(e.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+        
+        // Close menu when a link is clicked
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    }
+}
 
 // ═══════════════════════════════════════════════════════
 //  🔊 UI Interaction Sounds

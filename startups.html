@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Startups — Nandan Fire Legend Portfolio</title>
+  <meta name="description" content="Startups and Ventures founded by Nandan B — flagship products shaping the future." />
+  <link rel="icon" href="profile.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="vanilla-tilt.min.js"></script>
+
+  <style>
+    :root {
+      --fire-red: #ff3a00;
+      --fire-orange: #ff6b2b;
+      --fire-amber: #ff9d00;
+      --fire-gold: #ffd000;
+      --dark-bg: #060200;
+      --card-bg: rgba(255, 80, 0, 0.06);
+      --card-border: rgba(255, 120, 0, 0.25);
+      --text-main: #fff5e6;
+      --text-muted: #c4a88a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: rgba(6, 2, 0, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+
+    nav a:hover {
+      color: var(--fire-gold);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section#startups {
+      padding: 80px 6%;
+      text-align: center;
+    }
+
+    section#startups h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 50px;
+    }
+
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      overflow: hidden;
+      width: 300px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.35s, border-color 0.35s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 0 40px rgba(255, 100, 0, 0.4), 0 15px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 157, 0, 0.6);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
+    }
+
+    .p-content {
+      padding: 18px;
+      text-align: left;
+    }
+
+    .p-content h3 {
+      color: var(--fire-gold);
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .p-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tags span {
+      background: rgba(255, 100, 0, 0.12);
+      border: 1px solid rgba(255, 120, 0, 0.25);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--fire-amber);
+    }
+
+    .p-content a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--dark-bg);
+      background: linear-gradient(135deg, var(--fire-orange), var(--fire-amber));
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+
+    .p-content a:hover {
+      box-shadow: 0 0 20px rgba(255, 100, 0, 0.6);
+    }
+
+    /* ── Progress Bar ── */
+    .progress-wrap {
+      margin: 14px 0 6px;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .progress-track {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      height: 7px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 20px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .progress-fill.green  { background: linear-gradient(90deg, #4ade80, #22c55e); box-shadow: 0 0 8px rgba(74,222,128,0.5); }
+    .progress-fill.amber  { background: linear-gradient(90deg, var(--fire-orange), var(--fire-amber)); box-shadow: 0 0 8px rgba(255,157,0,0.5); }
+    .progress-fill.orange { background: linear-gradient(90deg, var(--fire-red), var(--fire-orange)); box-shadow: 0 0 8px rgba(255,100,0,0.5); }
+
+    footer {
+      background: rgba(6, 2, 0, 0.8);
+      text-align: center;
+      padding: 22px;
+      margin-top: 60px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 100, 0, 0.15);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      section#projects h2 {
+        font-size: 28px;
+      }
+
+      .project-card {
+        width: 90%;
+        max-width: 340px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <span class="logo">Nandan</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="startups.html" class="active">Startups</a>
+      <a href="consultation.html">Training</a>
+      <a href="robotics and sensors projects.html">Robotics & Sensors</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="startups">
+    <h2>🚀 Startups & Ventures</h2>
+    <p class="section-subtitle">My flagship products and scaling ecosystems</p>
+    
+    <div class="project-container" style="margin-bottom: 80px;">
+      
+      <!-- Docustore -->
+      <div class="project-card" style="width: 340px;">
+        <a href="https://docustore-website.onrender.com" target="_blank">
+          <img src="docustore_preview.png" alt="Docustore Website Preview" style="width:100%; height:160px; object-fit:cover; border-bottom:1px solid rgba(255,100,0,0.2); display:block;">
+        </a>
+        <div class="p-content" style="padding-top: 24px;">
+          <h3 style="font-size: 22px;">Docustore <span style="font-size:12px; color:#4ade80; float:right; background:rgba(74, 222, 128, 0.1); padding: 4px 8px; border-radius: 12px; margin-top: -2px;">✅ 100% Live</span></h3>
+          <p>A deployed document management and sharing platform built using modern web technologies. Write, Store, Organize, Export — Anywhere. Built specifically for educational institutions.</p>
+          <div class="tags">
+            <span>MERN Stack</span>
+            <span>Founder</span>
+            <span>Live Product</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Completion</span><span>100%</span></div>
+            <div class="progress-track"><div class="progress-fill green" data-width="100"></div></div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top: 14px; flex-wrap: wrap;">
+            <a href="https://docustore-frontend.onrender.com" target="_blank" style="flex:1; min-width:120px; text-align:center;">
+              <i class="fas fa-desktop"></i> Launch App
+            </a>
+            <a href="https://docustore-website.onrender.com" target="_blank" style="flex:1; min-width:120px; text-align:center; background: linear-gradient(135deg, #1a0800, #3a1200); color: var(--fire-amber); border: 1px solid rgba(255,157,0,0.4);">
+              <i class="fas fa-globe"></i> Visit Site
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CoreVantra ERP -->
+      <div class="project-card">
+        <div class="p-content" style="padding-top: 24px;">
+          <h3 style="font-size: 22px;">CoreVantra ERP <span style="font-size:12px; color:var(--fire-amber); float:right; background:rgba(255, 157, 0, 0.1); padding: 4px 8px; border-radius: 12px; margin-top: -2px;">98% Done</span></h3>
+          <p>A comprehensive school and college management ecosystem equipped with 30+ features to streamline academic and administrative operations.</p>
+          <div class="tags">
+            <span>EdTech</span>
+            <span>ERP System</span>
+            <span>Scalable</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Completion</span><span>98%</span></div>
+            <div class="progress-track"><div class="progress-fill amber" data-width="98"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FitVantra -->
+      <div class="project-card">
+        <div class="p-content" style="padding-top: 24px;">
+          <h3 style="font-size: 22px;">FitVantra <span style="font-size:12px; color:var(--fire-amber); float:right; background:rgba(255, 157, 0, 0.1); padding: 4px 8px; border-radius: 12px; margin-top: -2px;">60% Done</span></h3>
+          <p>An online fitness coaching platform tailored for digital health scaling, offering structured workout plans and diet guidance.</p>
+          <div class="tags">
+            <span>HealthTech</span>
+            <span>Coaching</span>
+            <span>Full Stack</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Completion</span><span>60%</span></div>
+            <div class="progress-track"><div class="progress-fill amber" data-width="60"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CleanEco -->
+      <div class="project-card">
+        <div class="p-content" style="padding-top: 24px;">
+          <h3 style="font-size: 22px;">CleanEco <span style="font-size:12px; color:var(--fire-amber); float:right; background:rgba(255, 157, 0, 0.1); padding: 4px 8px; border-radius: 12px; margin-top: -2px;">35% Done</span></h3>
+          <p>A smart waste management platform focused on routing efficient garbage collection metrics and eco-friendly logistics solutions.</p>
+          <div class="tags">
+            <span>CleanTech</span>
+            <span>Logistics</span>
+            <span>Smart Routing</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Completion</span><span>35%</span></div>
+            <div class="progress-track"><div class="progress-fill orange" data-width="35"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nandan · Forged with 🔥</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Animate progress bars when they come into view
+    const fills = document.querySelectorAll('.progress-fill');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.style.width = el.dataset.width + '%';
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+    fills.forEach(f => observer.observe(f));
+  </script>
+</body>
+
+</html>

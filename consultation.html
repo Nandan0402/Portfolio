@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact — Nandan Fire Legend Portfolio</title>
-  <meta name="description" content="Contact Nandan B — reach out through GitHub, LinkedIn, Instagram, or email." />
+  <title>Personal Training — Nandan Fire Legend Portfolio</title>
+  <meta name="description" content="Book an 8-Week Gym Personal Training consultation with Nandan." />
   <link rel="icon" href="profile.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -375,7 +375,7 @@
       <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
       <a href="startups.html">Startups</a>
-      <a href="consultation.html">Training</a>
+      <a href="consultation.html" class="active">Training</a>
       <a href="robotics and sensors projects.html">Robotics & Sensors</a>
       <a href="certificates.html">Certificates</a>
       <a href="contact.html">Contact</a>
@@ -383,13 +383,25 @@
   </header>
 
   <section id="contact">
-    <h2>📬 Contact Me</h2>
-    <p class="section-subtitle">Ready to forge something legendary together? Reach out.</p>
+    <h2>🏋️ Personal Training Consultation</h2>
+    <p class="section-subtitle">Join my exclusive 8-Week Comprehensive Curriculum designed for all fitness levels.</p>
 
     <!-- Message / Feedback Form -->
-    <div class="feedback-section">
-      <h3>📬 Get In Touch</h3>
-      <p class="sub">Feedback, questions, help, collab ideas — anything at all. Just fire it across!</p>
+    <div class="feedback-section" style="margin-top: 40px;">
+      
+      <div style="max-width: 750px; margin: 0 auto 40px; background: rgba(255, 157, 0, 0.05); border: 1px solid rgba(255,157,0,0.2); padding: 30px; border-radius: 12px; text-align: left;">
+        <h3 style="font-size: 20px; font-family: 'Outfit'; -webkit-text-fill-color: var(--fire-gold); margin-top: 0;">8-Week Curriculum Overview</h3>
+        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+          <strong>Weeks 1-2:</strong> Foundation assessment, basic anatomy, nutrition, and strength fundamentals.<br>
+          <strong>Weeks 3-4:</strong> Cardiovascular conditioning, macronutrient distribution, and diet prep.<br>
+          <strong>Weeks 5-6:</strong> Advanced strength overload, body composition, and specialized fat loss.<br>
+          <strong>Weeks 7-8:</strong> Recovery routines, active stretching, and long-term lifestyle integration.
+        </p>
+        <a href="notes.html?print=true" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(255,100,0,0.15); border: 1px solid rgba(255,100,0,0.4); color: var(--fire-gold); border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; margin-top: 15px; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,100,0,0.3)';" onmouseout="this.style.background='rgba(255,100,0,0.15)';"><i class="fas fa-file-pdf"></i> Download Notes as PDF</a>
+      </div>
+
+      <h3>📅 Book Your Session</h3>
+      <p class="sub">Fill out the consultation form below, and I'll reach out to schedule our session.</p>
 
       <form class="feedback-form" id="feedbackForm">
         <div class="form-row">
@@ -403,79 +415,39 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="ftype">Reason</label>
-          <select id="ftype" name="type" required>
-            <option value="" disabled selected>What's this about…</option>
-            <option value="General Feedback">💬 General Feedback</option>
-            <option value="Question">❓ Question</option>
-            <option value="Need Help">🤝 Need Help</option>
-            <option value="Collaboration">🤝 Collaboration Idea</option>
-            <option value="Project Inquiry">🚀 Project Inquiry</option>
-            <option value="Bug / Issue">🐛 Bug / Issue</option>
-            <option value="Just Saying Hi">👋 Just Saying Hi</option>
-            <option value="Other">✨ Other</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fphone">Phone Number</label>
+            <input type="tel" id="fphone" name="phone" placeholder="+1 234 567 8900" required />
+          </div>
+          <div class="form-group">
+            <label for="flevel">Current Fitness Level</label>
+            <select id="flevel" name="fitness_level" required>
+              <option value="" disabled selected>Select level…</option>
+              <option value="Complete Beginner">Complete Beginner</option>
+              <option value="Novice (Some experience)">Novice (Some experience)</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
         </div>
 
+
+
         <div class="form-group">
-          <label for="fmsg">Message</label>
-          <textarea id="fmsg" name="message" placeholder="Type anything… I read every message!" required></textarea>
+          <label for="fmsg">Fitness Goals / Medical Restrictions</label>
+          <textarea id="fmsg" name="goals" placeholder="Tell me what you want to achieve, any past injuries, dietary restrictions, etc…" required></textarea>
         </div>
 
         <button type="submit" class="btn-submit">
-          <i class="fas fa-paper-plane"></i> Send Message
+          <i class="fas fa-paper-plane"></i> Book Consultation
         </button>
 
         <div class="form-msg" id="formMsg"></div>
       </form>
     </div>
 
-    <div class="contact-grid">
 
-      <a class="contact-card" href="https://www.instagram.com/nandxn.fit/?hl=en" target="_blank">
-        <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-        <h3>Instagram</h3>
-        <p>@nandxn.fit</p>
-      </a>
-
-      <a class="contact-card" href="https://www.instagram.com/docu__store/?hl=en" target="_blank">
-        <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-        <h3>Startup</h3>
-        <p>@docu__store</p>
-      </a>
-
-      <a class="contact-card" href="https://www.linkedin.com/in/nandan-b-2a9b1b334/" target="_blank">
-        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-        <h3>LinkedIn</h3>
-        <p>Nandan B</p>
-      </a>
-
-      <a class="contact-card" href="mailto:nandanb449@gmail.com">
-        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-        <h3>Email</h3>
-        <p>nandanb449@gmail.com</p>
-      </a>
-
-      <a class="contact-card" href="https://github.com/Nandan0402" target="_blank">
-        <div class="contact-icon"><i class="fab fa-github"></i></div>
-        <h3>GitHub</h3>
-        <p>Nandan0402</p>
-      </a>
-
-      <a class="contact-card" href="https://docustore-frontend.onrender.com" target="_blank">
-        <div class="contact-icon"><i class="fas fa-desktop"></i></div>
-        <h3>Docustore App</h3>
-        <p>Application</p>
-      </a>
-
-      <a class="contact-card" href="https://docustore-website.onrender.com" target="_blank">
-        <div class="contact-icon"><i class="fas fa-globe"></i></div>
-        <h3>Docustore Site</h3>
-        <p>Website</p>
-      </a>
-
-    </div>
   </section>
 
   <footer>
