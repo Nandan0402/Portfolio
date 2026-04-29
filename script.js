@@ -157,14 +157,16 @@ async function fetchGitHubStats() {
         if (!response.ok) throw new Error('Failed to fetch user data');
         const data = await response.json();
 
-        const docustoreInsta = 150;
-        const docustoreLinkedIn = 50;
-        const nandanLinkedIn = 200;
+        const techs = 15;
+        const linkedin = 684;
+        const ig = 108;
+        const startup = 150;
 
         animateValue("project-count", data.public_repos);
-        animateValue("follower-count", data.followers);
-        animateValue("insta-count", docustoreInsta);
-        animateValue("linkedin-count", docustoreLinkedIn + nandanLinkedIn);
+        animateValue("tech-count", techs);
+        animateValue("linkedin-count", linkedin);
+        animateValue("ig-count", ig);
+        animateValue("startup-count", startup);
     } catch (error) {
         console.error("Error fetching stats:", error);
         document.getElementById('project-count').innerText = "10";
@@ -310,40 +312,52 @@ function setupMobileMenu() {
                     width: 250px;
                     height: 100vh;
                     background: rgba(6, 2, 0, 0.98);
-                    border-right: 2px solid var(--fire-amber);
+                    border-right: 3px solid #ff9800; /* Bright vertical orange line like in image */
                     border-bottom: none;
-                    padding: 80px 20px 30px;
+                    padding: 80px 15px 30px;
                     max-height: none;
                     overflow-y: auto;
                     transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                    gap: 10px !important;
+                    gap: 12px !important;
                     box-shadow: none;
                     z-index: 1000;
                 }
+
+                /* Custom Scrollbar for Mobile Nav - The "Slide Bar" */
+                nav::-webkit-scrollbar {
+                    width: 4px;
+                }
+                nav::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.1);
+                }
+                nav::-webkit-scrollbar-thumb {
+                    background: #ff9800; /* Solid orange line like image 2 */
+                    border-radius: 10px;
+                }
+
                 nav.active {
                     left: 0;
                     box-shadow: 20px 0 50px rgba(0,0,0,0.9);
-                    padding-top: 80px;
                 }
+
                 nav a {
                     width: 100%;
-                    padding: 12px 15px;
+                    padding: 10px 15px;
                     text-align: left;
                     font-size: 16px !important;
-                    border-bottom: 1px solid rgba(255,100,0,0.1);
-                    border-radius: 8px;
+                    border-radius: 25px; /* Rounded ends like image 1 */
                     transition: all 0.3s ease;
-                }
-                nav a:last-child {
-                    border-bottom: none;
-                }
-                nav a::after {
-                    display: none; /* Hide standard underline */
+                    color: #fff;
+                    text-decoration: none;
                 }
                 nav a:hover, nav a.active {
-                    background: rgba(255, 100, 0, 0.15);
-                    color: var(--fire-gold);
-                    transform: translateX(6px);
+                    background: #ff9800; /* Horizontal orange bar like image 1 */
+                    color: #000 !important;
+                    font-weight: bold;
+                    transform: translateX(5px);
+                }
+                nav a::after {
+                    display: none;
                 }
             }
         `;
@@ -379,6 +393,17 @@ function setupMobileMenu() {
                 nav.classList.remove('active');
                 menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
             });
+        });
+
+        // Highlight active link
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPath) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
         });
     }
 }
@@ -417,3 +442,330 @@ function playClickSound() {
         console.warn("Audio play failed:", e);
     }
 }
+
+// ═══════════════════════════════════════════════════════
+//  💬 Testimonials & Feedback System
+// ═══════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    loadFeedbacks();
+
+    // Dev tool: Double click "Client Feedback" title to clear test reviews
+    const feedbackTitle = document.querySelector('.testimonials-section .section-title');
+    if (feedbackTitle) {
+        feedbackTitle.addEventListener('dblclick', () => {
+            if(confirm("Clear all test feedbacks?")) {
+                localStorage.removeItem('clientReviews');
+                const container = document.getElementById('testimonials-container');
+                if (container) container.innerHTML = '';
+            }
+        });
+    }
+
+    const form = document.getElementById('feedback-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('fb-name').value;
+            const business = document.getElementById('fb-business').value;
+            const rating = parseInt(document.getElementById('fb-rating').value);
+            const message = document.getElementById('fb-message').value;
+
+            const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
+
+            const newFeedback = { name, business, rating, message, date };
+
+            // Save to localStorage
+            let feedbacks = JSON.parse(localStorage.getItem('clientReviews')) || [];
+            feedbacks.unshift(newFeedback); // Add to the top
+            localStorage.setItem('clientReviews', JSON.stringify(feedbacks));
+
+            // Render it instantly
+            renderFeedbackCard(newFeedback, true);
+
+            // Show success message
+            const statusMsg = document.getElementById('fb-status');
+            statusMsg.textContent = "Feedback submitted successfully!";
+            statusMsg.className = "feedback-msg success";
+
+            // Reset form
+            form.reset();
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                statusMsg.style.display = 'none';
+                statusMsg.className = "feedback-msg";
+            }, 3000);
+            statusMsg.style.display = 'block';
+        });
+    }
+});
+
+function loadFeedbacks() {
+    let feedbacks = JSON.parse(localStorage.getItem('clientReviews')) || [];
+    // Only render the local storage ones, hardcoded ones are already in HTML
+    feedbacks.reverse().forEach(fb => {
+        renderFeedbackCard(fb, true); // Add local storage reviews to the top
+    });
+}
+
+function renderFeedbackCard(fb, prepend = false) {
+    const container = document.getElementById('testimonials-container');
+    if (!container) return;
+
+    const card = document.createElement('div');
+    card.className = 'testimonial-card';
+
+    let starsHtml = '';
+    for (let i = 0; i < 5; i++) {
+        if (i < fb.rating) {
+            starsHtml += '<i class="fas fa-star"></i>';
+        } else {
+            starsHtml += '<i class="far fa-star"></i>'; // empty star
+        }
+    }
+
+    card.innerHTML = `
+        <div class="t-header">
+          <div class="t-info">
+            <h4>${escapeHTML(fb.name)}</h4>
+            <span>${escapeHTML(fb.business)}</span>
+          </div>
+          <div class="t-rating">
+            ${starsHtml}
+          </div>
+        </div>
+        <div class="t-message">“${escapeHTML(fb.message)}”</div>
+        <div class="t-date">${escapeHTML(fb.date)}</div>
+    `;
+
+    if (prepend) {
+        container.prepend(card);
+    } else {
+        container.appendChild(card);
+    }
+}
+
+function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, 
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag])
+    );
+}
+
+// ═══════════════════════════════════════════════════════
+//  🔥 Floating Fire Toast Notifications
+// ═══════════════════════════════════════════════════════
+function initFireToasts() {
+    // 1. Create Toast Container
+    const container = document.createElement('div');
+    container.id = 'fire-toast-container';
+    document.body.appendChild(container);
+
+    // 2. Inject CSS
+    const style = document.createElement('style');
+    style.innerHTML = `
+        #fire-toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            pointer-events: none;
+        }
+        .fire-toast {
+            background: rgba(10, 2, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 100, 0, 0.3);
+            border-left: 4px solid var(--fire-orange, #ff6400);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 0 25px rgba(255, 80, 0, 0.25);
+            transform: translateX(-120%);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 350px;
+            pointer-events: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .fire-toast::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, rgba(255,100,0,0.1), transparent);
+            z-index: -1;
+        }
+        @keyframes avatarFlameGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 100, 0, 0.4); background-position: 0% 50%; }
+            50% { box-shadow: 0 0 25px rgba(255, 60, 0, 0.9); background-position: 100% 50%; }
+            100% { box-shadow: 0 0 10px rgba(255, 100, 0, 0.4); background-position: 0% 50%; }
+        }
+        @keyframes toastBorderFlicker {
+            0% { border-left-color: var(--fire-orange, #ff6400); box-shadow: 0 0 25px rgba(255, 80, 0, 0.25); }
+            50% { border-left-color: var(--fire-gold, #ffc800); box-shadow: 0 0 35px rgba(255, 80, 0, 0.5); }
+            100% { border-left-color: var(--fire-orange, #ff6400); box-shadow: 0 0 25px rgba(255, 80, 0, 0.25); }
+        }
+        .fire-toast.show {
+            transform: translateX(0);
+            opacity: 1;
+            animation: toastBorderFlicker 3s infinite alternate ease-in-out;
+        }
+        .fire-toast-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--fire-gold, #ffc800), var(--fire-orange, #ff6400), var(--fire-red, #ff2a00), var(--fire-gold, #ffc800));
+            background-size: 300% 300%;
+            animation: avatarFlameGlow 2.5s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #fff;
+            font-size: 16px;
+            flex-shrink: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .fire-toast-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .fire-toast-text {
+            color: #eee;
+            font-size: 14px;
+            line-height: 1.4;
+            font-family: 'Outfit', sans-serif;
+        }
+        .fire-toast-text b {
+            color: var(--fire-gold, #ffc800);
+            font-weight: 700;
+        }
+        .fire-toast-time {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        @media (max-width: 600px) {
+            #fire-toast-container {
+                left: 10px;
+                right: 10px;
+                bottom: 80px; /* Raised to avoid overlapping common bottom elements */
+                align-items: center;
+                gap: 10px;
+            }
+            .fire-toast {
+                width: 100%;
+                max-width: 340px;
+                padding: 12px 15px;
+                transform: translateY(150%);
+            }
+            .fire-toast.show {
+                transform: translateY(0);
+            }
+            .fire-toast-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+            .fire-toast-text {
+                font-size: 13px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 3. Random Notification Data
+    const names = [
+        "Aarav M.", "Sunita Mehra", "John D.", "Priya K.", "Michael S.", "Rahul V.", "Emma W.", "David C.",
+        "Vikram S.", "Amit R.", "Neha K.", "Sophie L.", "James T.", "Karan B.", "Ayesha M.", "Rohan D.",
+        "Daniel H.", "Meera J.", "Oliver P.", "Pooja N.", "Lucas W.", "Sneha Y.", "Arjun T."
+    ];
+    const actions = [
+        "just booked a <b>Gym Website</b>",
+        "inquired about a <b>Clothing E-commerce Store</b>",
+        "hired for a <b>Salon Booking Platform</b>",
+        "requested a quote for a <b>Real Estate Website</b>",
+        "just viewed <b>Restaurant & Cafe Websites</b>",
+        "is looking at <b>Car Wash Portals</b>",
+        "checked out <b>Business Portfolio Websites</b>",
+        "is checking out <b>Healthcare Clinic Portals</b>",
+        "inquired about a <b>Travel Agency Website</b>",
+        "just booked a <b>Logistics & Transport App</b>",
+        "requested a quote for a <b>Custom CRM System</b>",
+        "hired for an <b>Event Management Platform</b>",
+        "just viewed <b>Law Firm Websites</b>",
+        "is looking at <b>Interior Design Portals</b>",
+        "inquired about a <b>Photography Portfolio</b>",
+        "checked out <b>Grocery Delivery Apps</b>",
+        "just booked an <b>Educational LMS Platform</b>",
+        "hired for a <b>Jewelry E-commerce Store</b>",
+        "requested a quote for a <b>Hotel Booking Website</b>",
+        "is looking at <b>Fintech Web Applications</b>",
+        "just viewed <b>SaaS Dashboard Development</b>",
+        "inquired about an <b>Auto Dealership Website</b>",
+        "hired for a <b>Consultancy Firm Website</b>",
+        "just submitted <b>Client Feedback</b>",
+        "downloaded your <b>Resume</b>"
+    ];
+    const times = ["Just now", "2 mins ago", "5 mins ago", "12 mins ago", "20 mins ago"];
+
+    function spawnToast() {
+        const name = names[Math.floor(Math.random() * names.length)];
+        const action = actions[Math.floor(Math.random() * actions.length)];
+        const time = times[Math.floor(Math.random() * times.length)];
+        
+        // Get initials (e.g. Sunita Mehra -> SM)
+        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+        const toast = document.createElement('div');
+        toast.className = 'fire-toast';
+        toast.innerHTML = `
+            <div class="fire-toast-avatar">${initials}</div>
+            <div class="fire-toast-content">
+                <div class="fire-toast-text"><b>${name}</b> ${action}</div>
+                <div class="fire-toast-time">${time}</div>
+            </div>
+        `;
+
+        container.appendChild(toast);
+
+        // Sound effect (optional, might be too intrusive, so we skip sound for toasts)
+        
+        // Trigger animation
+        requestAnimationFrame(() => {
+            setTimeout(() => toast.classList.add('show'), 50);
+        });
+
+        // Remove after 4.5 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 600); // Wait for transition
+        }, 4500);
+    }
+
+    // Spawn first toast after 2.5 seconds
+    setTimeout(spawnToast, 2500);
+
+    // Spawn periodically every 15-30 seconds
+    setInterval(() => {
+        if(Math.random() > 0.3) { // 70% chance to spawn to make it feel organic
+            spawnToast();
+        }
+    }, 20000);
+}
+
+document.addEventListener('DOMContentLoaded', initFireToasts);
+
+

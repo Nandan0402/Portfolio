@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nandan — Fire Legend Portfolio</title>
+  <title>Nandan — Freelancing Services</title>
   <meta name="description"
     content="Nandan B — Full Stack Developer and Startup Founder. Proven MERN expertise with 50+ projects, a deployed product (Docustore), and multiple ongoing startups." />
   <link rel="icon" href="profile.jpg" type="image/jpeg">
@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
 
   <style>
     :root {
@@ -143,20 +143,9 @@
     }
 
     @keyframes fireTextGlow {
-      0% {
-        background-position: 0% 50%;
-        text-shadow: 0 0 5px rgba(255, 100, 0, 0.1);
-      }
-
-      50% {
-        background-position: 100% 50%;
-        text-shadow: 0 0 25px rgba(255, 150, 0, 0.6);
-      }
-
-      100% {
-        background-position: 0% 50%;
-        text-shadow: 0 0 5px rgba(255, 100, 0, 0.1);
-      }
+      0% { background-position: 0% 50%; text-shadow: 0 0 5px rgba(255,100,0,0.1); }
+      50% { background-position: 100% 50%; text-shadow: 0 0 25px rgba(255,150,0,0.6); }
+      100% { background-position: 0% 50%; text-shadow: 0 0 5px rgba(255,100,0,0.1); }
     }
 
     .hero-text .subtitle {
@@ -263,17 +252,9 @@
 
     /* ── Float Animation ── */
     @keyframes floatHero {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-15px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
     }
 
     /* ── Hero Image ── */
@@ -407,7 +388,6 @@
     .freelance-section {
       padding: 60px 8% 80px;
     }
-
     .section-title {
       font-family: 'Cinzel', serif;
       font-size: 40px;
@@ -418,13 +398,11 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .freelance-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
     }
-
     .service-card {
       background: rgba(255, 80, 0, 0.03);
       border: 1px solid var(--card-border);
@@ -435,34 +413,29 @@
       position: relative;
       overflow: hidden;
     }
-
     .service-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 15px 40px rgba(255, 80, 0, 0.15);
       border-color: rgba(255, 120, 0, 0.5);
     }
-
     .service-card h3 {
       font-size: 22px;
       color: var(--fire-gold);
       margin-top: 0;
       margin-bottom: 12px;
     }
-
     .service-card p {
       font-size: 15px;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 20px;
     }
-
     .service-price {
       font-size: 18px;
       font-weight: 700;
       color: var(--text-main);
       margin-bottom: 24px;
     }
-
     .btn-contact-service {
       display: inline-block;
       padding: 10px 24px;
@@ -474,7 +447,6 @@
       text-decoration: none;
       transition: all 0.3s;
     }
-
     .btn-contact-service:hover {
       background: var(--fire-orange);
       color: #fff;
@@ -490,7 +462,6 @@
       border-bottom: 1px solid rgba(255, 100, 0, 0.1);
       margin: 40px 0;
     }
-
     .cta-section h2 {
       font-family: 'Cinzel', serif;
       font-size: 36px;
@@ -502,49 +473,44 @@
     .testimonials-section {
       padding: 60px 8% 40px;
     }
-
     .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 30px;
     }
-
     .testimonial-card {
+      width: 100%;
+      max-width: 380px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 30px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s;
     }
-
     .testimonial-card:hover {
       transform: translateY(-5px);
     }
-
     .t-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
     }
-
     .t-info h4 {
       margin: 0;
       font-size: 18px;
       color: var(--fire-gold);
     }
-
     .t-info span {
       font-size: 13px;
       color: var(--text-muted);
     }
-
     .t-rating {
       color: var(--fire-amber);
       font-size: 14px;
     }
-
     .t-message {
       font-size: 15px;
       font-style: italic;
@@ -552,7 +518,6 @@
       line-height: 1.6;
       margin-bottom: 15px;
     }
-
     .t-date {
       font-size: 12px;
       color: rgba(196, 168, 138, 0.6);
@@ -565,7 +530,6 @@
       display: flex;
       justify-content: center;
     }
-
     .feedback-container {
       background: rgba(6, 2, 0, 0.6);
       border: 1px solid var(--card-border);
@@ -576,7 +540,6 @@
       box-shadow: 0 0 30px rgba(255, 80, 0, 0.05);
       backdrop-filter: blur(10px);
     }
-
     .feedback-container h3 {
       text-align: center;
       color: var(--fire-orange);
@@ -584,21 +547,16 @@
       margin-top: 0;
       margin-bottom: 25px;
     }
-
     .form-group {
       margin-bottom: 20px;
     }
-
     .form-group label {
       display: block;
       font-size: 14px;
       color: var(--text-muted);
       margin-bottom: 8px;
     }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 100, 0, 0.2);
@@ -609,25 +567,19 @@
       font-size: 15px;
       transition: border-color 0.3s;
     }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       outline: none;
       border-color: var(--fire-orange);
       background: rgba(255, 255, 255, 0.08);
     }
-
     .form-group textarea {
       resize: vertical;
       min-height: 100px;
     }
-
     .form-group select option {
       background: var(--dark-bg);
       color: var(--text-main);
     }
-
     .btn-submit {
       width: 100%;
       padding: 14px;
@@ -640,12 +592,10 @@
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .btn-submit:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 20px rgba(255, 100, 0, 0.4);
     }
-
     .feedback-msg {
       display: none;
       text-align: center;
@@ -655,14 +605,13 @@
       font-size: 14px;
       font-weight: 600;
     }
-
     .feedback-msg.success {
       display: block;
       background: rgba(46, 213, 115, 0.1);
       color: #2ed573;
       border: 1px solid rgba(46, 213, 115, 0.3);
     }
-
+    
     .see-feedback-btn-wrapper {
       text-align: center;
       margin-top: 40px;
@@ -734,8 +683,7 @@
         gap: 12px;
       }
 
-      .btn-primary,
-      .btn-secondary {
+      .btn-primary, .btn-secondary {
         padding: 12px 14px;
         font-size: 14px;
         flex: 1 1 calc(50% - 12px);
@@ -769,7 +717,7 @@
   <canvas id="bg-canvas"></canvas>
 
   <header>
-    <span class="logo">NANDAN.B</span>
+    <span class="logo">NANDAN</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -779,83 +727,79 @@
       <a href="consultation.html">Training</a>
       <a href="robotics and sensors projects.html">Robotics & Sensors</a>
       <a href="certificates.html">Certificates</a>
-      <a href="freelance.html">Freelance</a>
+      <a href="freelance.html" class="active">Freelance</a>
       <a href="feedback.html">Feedback</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1>NANDAN B</h1>
-      <p class="subtitle">Founder of Docustore</p>
-      <p class="description">
-        I forge scalable web applications with MERN stack expertise and an entrepreneurial drive. With 50+
-        completed projects, a deployed product (Docustore), and three ongoing startups (CoreVantra ERP,
-        FitVantra, CleanEco), I turn bold ideas into high-impact, real-world solutions.
-      </p>
 
-      <div class="cta-buttons">
-        <a href="projects.html" class="btn-primary">🔥 See My Work</a>
-        <a href="contact.html" class="btn-secondary">✈ Contact Me</a>
-        <a href="Nandan_Resume.pdf" class="btn-secondary" download>📄 Resume</a>
+
+  <!-- ═══ FREELANCING SERVICES ═══ -->
+  <section class="freelance-section" id="freelance">
+    <h2 class="section-title">Freelancing Services</h2>
+    <div class="freelance-grid">
+      <div class="service-card">
+        <h3>Frontend Development</h3>
+        <p>Stunning, responsive user interfaces with smooth animations and premium modern designs tailored to your brand.</p>
+        <div class="service-price">Starting from ₹12,000</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
       </div>
-
-      <div class="social-chips">
-        <a href="https://github.com/Nandan0402" target="_blank" class="social-chip">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/nandan-b-2a9b1b334/" target="_blank" class="social-chip">
-          <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-        <a href="mailto:nandanb449@gmail.com" class="social-chip">
-          <i class="fas fa-envelope"></i> Email
-        </a>
-        <a href="https://www.instagram.com/nandxn.fit/?hl=en" target="_blank" class="social-chip">
-          <i class="fab fa-instagram"></i> Personal
-        </a>
-        <a href="https://www.instagram.com/docu__store/?hl=en" target="_blank" class="social-chip">
-          <i class="fab fa-instagram"></i> Startup
-        </a>
+      <div class="service-card">
+        <h3>Backend Development</h3>
+        <p>Secure, scalable APIs and robust databases architected to handle high traffic and complex business logic.</p>
+        <div class="service-price">Starting from ₹15,000</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
       </div>
-    </div>
-
-    <div class="hero-image">
-      <div class="img-ring">
-        <img src="profile.jpg" alt="Nandan B" />
+      <div class="service-card">
+        <h3>Full Stack Development</h3>
+        <p>Complete web applications from database to user interface. Seamless integration and high performance.</p>
+        <div class="service-price">Starting from ₹25,000</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
+      </div>
+      <div class="service-card">
+        <h3>Business Websites</h3>
+        <p>Professional online presence for your company to attract more clients and establish industry credibility.</p>
+        <div class="service-price">Starting from ₹8,000</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
+      </div>
+      <div class="service-card">
+        <h3>E-commerce Websites</h3>
+        <p>Feature-rich online stores with secure payment gateways, inventory management, and intuitive shopping experiences.</p>
+        <div class="service-price">Starting from ₹35,000</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
+      </div>
+      <div class="service-card">
+        <h3>Gym / Salon / Car Wash</h3>
+        <p>Specialized booking platforms with scheduling, service selection, and client management functionalities.</p>
+        <div class="service-price">Starting from ₹20,000</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
+      </div>
+      <div class="service-card">
+        <h3>ERP Systems</h3>
+        <p>Comprehensive enterprise resource planning software to streamline your business operations and data.</p>
+        <div class="service-price">Custom Pricing</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
+      </div>
+      <div class="service-card">
+        <h3>AI Integrated Web Apps</h3>
+        <p>Next-generation applications powered by AI. Chatbots, automated data analysis, and smart recommendations.</p>
+        <div class="service-price">Custom Pricing</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
+      </div>
+      <div class="service-card">
+        <h3>Website Maintenance</h3>
+        <p>Ongoing support, performance optimization, security updates, and regular backups for your existing site.</p>
+        <div class="service-price">Starting from ₹4,000/mo</div>
+        <a href="contact.html" class="btn-contact-service">Get a Quote</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ STATS ═══ -->
-  <section class="stats-section">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number" id="project-count">56+</div>
-        <div class="stat-label">Projects Completed</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">1+</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="tech-count">15+</div>
-        <div class="stat-label">Technologies Used</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="linkedin-count">684+</div>
-        <div class="stat-label">LinkedIn Followers</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="ig-count">108+</div>
-        <div class="stat-label">Instagram Followers</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" id="startup-count">150+</div>
-        <div class="stat-label">Startup Followers</div>
-      </div>
-    </div>
+  <!-- ═══ CTA SECTION ═══ -->
+  <section class="cta-section">
+    <h2>Need a Website for Your Business? Let’s Build It.</h2>
+    <a href="contact.html" class="btn-primary">🔥 Start Your Project</a>
   </section>
 
   <footer>
