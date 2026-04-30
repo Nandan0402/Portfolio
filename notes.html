@@ -18,9 +18,38 @@
   th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
   th { background-color: #f8f9fa; }
   ul { padding-left: 20px; }
+
+  /* Print Optimization to remove gaps */
+  @media print {
+    body {
+      padding: 0;
+      margin: 10mm;
+      max-width: 100%;
+    }
+    h1, h2, h3 {
+      page-break-after: avoid;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    table, ul {
+      page-break-inside: avoid;
+    }
+    h1 { margin-top: 0; }
+  }
 </style>
 </head>
 <body>
+  <div style="margin-bottom: 20px; font-size: 14px; border-bottom: 1px solid #eee; padding-bottom: 10px;" class="no-print">
+    <a href="index.html" style="color: #ff6b2b; text-decoration: none; margin-right: 15px;">← Back to Portfolio</a>
+    <a href="resume.html" style="color: #ff6b2b; text-decoration: none;">View Resume</a>
+  </div>
+  
+  <style>
+    @media print {
+      .no-print { display: none; }
+    }
+  </style>
+
   <script>
     // Auto-trigger print dialog when opened with ?print=true
     window.addEventListener('DOMContentLoaded', function () {
@@ -93,7 +122,7 @@
     <li><strong>Stress management:</strong> Impact of stress on fitness goals</li>
   </ul>
 
-  <div style="page-break-after: always;"></div>
+
 
   <h2>WEEK 2: BUILDING STRENGTH FOUNDATION</h2>
   <h3>Lesson 2.1: Proper Form & Technique</h3>
@@ -137,8 +166,6 @@
     <tr><td>Friday</td><td>Leg Press<br>Incline DB Press<br>Barbell Rows</td><td>3 x 10<br>3 x 10<br>3 x 8</td><td>90 sec</td></tr>
   </table>
 
-  <div style="page-break-after: always;"></div>
-
   <h2>WEEK 3: CARDIOVASCULAR CONDITIONING</h2>
   <ul>
     <li><strong>Heart rate zones:</strong> Resting, moderate intensity, high intensity</li>
@@ -159,8 +186,6 @@
     <li><strong>Carbohydrates & Fats:</strong> 40-50% Carbs, 20-30% Fats.</li>
     <li><strong>Supplementation Guide:</strong> Whey protein (convenient post-workout), Creatine monohydrate (supports muscle gains), Multivitamin (fills micronutrient gaps), Omega-3 fish oil, Vitamin D3.</li>
   </ul>
-
-  <div style="page-break-after: always;"></div>
 
   <h2>WEEK 5: ADVANCED STRENGTH TRAINING</h2>
   <ul>
@@ -192,8 +217,6 @@
     <li><strong>Static stretching:</strong> After workouts, hold 20-30 seconds each</li>
     <li><strong>RICE:</strong> Rest, Ice, Compression, Elevation for acute injuries</li>
   </ul>
-
-  <div style="page-break-after: always;"></div>
 
   <h2>WEEK 8: INTEGRATION & ADVANCED TECHNIQUES</h2>
   <ul>

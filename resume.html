@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nandan B — Professional Resume</title>
+  <link rel="icon" href="profile.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --primary-color: #E65100; /* Deep Orange */
+      --text-dark: #333;
+      --text-gray: #666;
+      --line-color: #ddd;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f4f4f4;
+      color: var(--text-dark);
+      line-height: 1.5;
+      padding: 40px 0;
+    }
+
+    .resume-page {
+      width: 190mm; /* Adjusted to fit A4 with margins */
+      min-height: 277mm;
+      margin: 0 auto;
+      background: #fff;
+      padding: 15mm;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .contact-bar {
+      font-size: 13px;
+      color: var(--text-gray);
+      margin-bottom: 8px;
+    }
+
+    .contact-bar span {
+      margin: 0 8px;
+    }
+
+    .links-bar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .links-bar a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ── Section Styling ── */
+    section {
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      font-size: 18px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-color);
+      padding-bottom: 5px;
+      margin-bottom: 12px;
+    }
+
+    .summary {
+      font-size: 14px;
+      text-align: justify;
+    }
+
+    /* ── Grid Layouts ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .competency-group h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #000;
+    }
+
+    .competency-group ul {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-gray);
+    }
+
+    .competency-group li {
+      margin-bottom: 4px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .competency-group li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+    }
+
+    /* ── Experience Items ── */
+    .item {
+      margin-bottom: 18px;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .item-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .item-date {
+      font-size: 12px;
+      color: var(--text-gray);
+    }
+
+    .item-desc {
+      font-size: 13px;
+      color: var(--text-gray);
+      list-style: disc;
+      margin-left: 20px;
+    }
+
+    .item-desc li {
+      margin-bottom: 2px;
+    }
+
+    /* ── Tags / Chips ── */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      padding: 2px 10px;
+      border-radius: 4px;
+      color: var(--text-gray);
+    }
+
+    /* ── Floating Print Button ── */
+    .print-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-weight: 700;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .home-btn {
+      position: fixed;
+      bottom: 90px;
+      right: 30px;
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 14px;
+      z-index: 100;
+    }
+
+    /* ── Print Specifics ── */
+    @media print {
+      body {
+        padding: 0;
+        background: none;
+      }
+      .resume-page {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        padding: 5mm; 
+        min-height: auto;
+      }
+      .print-btn, .home-btn {
+        display: none;
+      }
+      section {
+        page-break-inside: avoid;
+        margin-bottom: 15px;
+      }
+      h2 {
+        page-break-after: avoid;
+        margin-bottom: 8px;
+      }
+      .resume-page {
+        padding: 8mm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <button class="print-btn" onclick="downloadResume()">
+    <i class="fas fa-file-pdf"></i> Download PDF
+  </button>
+  <a href="index.html" class="home-btn">
+    <i class="fas fa-home"></i> Portfolio
+  </a>
+
+  <div class="resume-page">
+    <header>
+      <h1>NANDAN B</h1>
+      <div class="contact-bar">
+        <span>Bengaluru, India</span> | 
+        <span>nandanb449@gmail.com</span> | 
+        <span>+91 8310425800</span>
+      </div>
+      <div class="links-bar">
+        <a href="https://github.com/Nandan0402" target="_blank">GitHub</a>
+        <a href="https://www.youtube.com/@NandxnFit" target="_blank">YouTube</a>
+        <a href="https://www.instagram.com/nandxn.fit/" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/nandan-b-2a9b1b334/" target="_blank">LinkedIn</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Professional Summary</h2>
+      <p class="summary">
+        Entrepreneur, freelancer, fitness trainer, blogger, and tech enthusiast with hands-on experience in building startups, full-stack development, AI/ML, and digital marketing. Founder of DocuStore and active fitness content creator. Strong execution mindset with proven achievements in competitions, hackathons, and real-world projects.
+      </p>
+    </section>
+
+    <section>
+      <h2>Core Competencies</h2>
+      <div class="grid-2">
+        <div class="competency-group">
+          <h3>Entrepreneurship & Business</h3>
+          <ul>
+            <li>Startup Development & Execution</li>
+            <li>Business Strategy & Operations</li>
+            <li>Client Management</li>
+            <li>Freelancing & Service Delivery</li>
+            <li>Sales & Marketing</li>
+          </ul>
+        </div>
+        <div class="competency-group">
+          <h3>Content & Branding</h3>
+          <ul>
+            <li>Fitness Blogging & Content Creation</li>
+            <li>YouTube Strategy</li>
+            <li>Social Media Growth</li>
+            <li>Digital Marketing</li>
+          </ul>
+        </div>
+        <div class="competency-group">
+          <h3>Technical Skills</h3>
+          <ul>
+            <li>MERN Stack Development</li>
+            <li>AI/ML & Data Science Basics</li>
+            <li>Cyber Security Fundamentals</li>
+            <li>Web Development</li>
+          </ul>
+        </div>
+        <div class="competency-group">
+          <h3>Fitness & Performance</h3>
+          <ul>
+            <li>Strength Training</li>
+            <li>Bodybuilding & Powerlifting</li>
+            <li>Diet Planning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Professional Experience</h2>
+      
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Founder – DocuStore</div>
+          <div class="item-date">📅 Jan 2026 – Present</div>
+        </div>
+        <ul class="item-desc">
+          <li>Founded and launched a startup focused on document and digital services.</li>
+          <li>Managed operations, branding, marketing, and client handling.</li>
+          <li>Built workflows, pricing models, and growth strategies.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Freelancer – Web & Digital Services</div>
+          <div class="item-date">📅 Jan 2026 – Present</div>
+        </div>
+        <ul class="item-desc">
+          <li>Delivered web development and digital marketing solutions to clients.</li>
+          <li>Supported startups and small businesses in building online presence.</li>
+          <li>Managed projects independently from planning to execution.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Startup Builder (Independent Projects)</div>
+          <div class="item-date">📅 Jan 2026 – Present</div>
+        </div>
+        <ul class="item-desc">
+          <li>Built and tested multiple startup ideas.</li>
+          <li>Applied sales, marketing, and business strategies.</li>
+          <li>Focused on execution and scalability.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Gym Personal Trainer</div>
+          <div class="item-date">📅 Jan 2026 – Present</div>
+        </div>
+        <ul class="item-desc">
+          <li>Trained clients in strength training, bodybuilding, and fitness programs.</li>
+          <li>Designed structured workout and diet plans.</li>
+          <li>Delivered measurable improvements in performance and physique.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Content Creator & Fitness Blogger</div>
+          <div class="item-date">📅 Feb 2026 – Present</div>
+        </div>
+        <ul class="item-desc">
+          <li>Created blogs and digital content on fitness, discipline, and mindset.</li>
+          <li>Published on YouTube and social media platforms.</li>
+          <li>Applied digital marketing strategies to grow audience.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Internship</h2>
+      <p class="summary">Completed internship with practical exposure to full-stack development and real-world problem-solving, contributing to project planning and execution.</p>
+    </section>
+
+    <section>
+      <h2>Key Projects</h2>
+      <div class="item">
+        <div class="item-title">DocuStore Startup</div>
+        <div class="item-desc" style="list-style:none; margin-left:0;">Built and managed a startup from scratch. Focused on digital services, operations, and customer handling.</div>
+      </div>
+      <div class="item">
+        <div class="item-title">Fitness Blog & Content Platform</div>
+        <div class="item-desc" style="list-style:none; margin-left:0;">Developed fitness blogs and content strategy. Built audience engagement and personal brand.</div>
+      </div>
+      <div class="item">
+        <div class="item-title">Web Development Projects</div>
+        <div class="item-desc" style="list-style:none; margin-left:0;">Developed applications using MERN stack. Focused on responsive and user-friendly design.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Bachelor of Computer Applications (BCA)</div>
+          <div class="item-date">Pursuing</div>
+        </div>
+        <div class="item-desc" style="list-style:none; margin-left:0;">
+          Ramaiah College of Arts, Science & Commerce, Bengaluru
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">Pre-University Course (2nd PUC)</div>
+          <div class="item-date">Completed</div>
+        </div>
+        <div class="item-desc" style="list-style:none; margin-left:0;">
+          Seshadripuram First Grade College, Yelahanka
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <div class="item-title">SSLC (10th Standard)</div>
+          <div class="item-date">Completed</div>
+        </div>
+        <div class="item-desc" style="list-style:none; margin-left:0;">
+          Sandeepani Niketan English High School
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Certifications</h2>
+      <div class="tag-container">
+        <div class="tag">Cyber Security</div>
+        <div class="tag">Artificial Intelligence (AI)</div>
+        <div class="tag">Machine Learning (ML)</div>
+        <div class="tag">Data Science (Advanced AI/ML)</div>
+        <div class="tag">MERN Stack Development</div>
+        <div class="tag">Sales & Marketing</div>
+        <div class="tag">Digital Marketing</div>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <section>
+        <h2>Achievements</h2>
+        <div class="item">
+          <div class="item-title">🥇 1st Place – Web Designing</div>
+          <div class="item-date">Techno Freaks | Feb 2026</div>
+        </div>
+        <div class="item">
+          <div class="item-title">🏆 Hackathon Participant</div>
+          <div class="item-date">YUGASTR IT Fest | Feb 2026</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Interests</h2>
+        <div class="tag-container">
+          <div class="tag">Bodybuilding</div>
+          <div class="tag">Powerlifting</div>
+          <div class="tag">Content Creation</div>
+          <div class="tag">Startups</div>
+          <div class="tag">AI & Tech</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="grid-2">
+      <section>
+        <h2>Languages</h2>
+        <p class="summary">English, Kannada, Hindi</p>
+      </section>
+      <section>
+        <h2>Attributes</h2>
+        <p class="summary">Discipline and consistency, strong execution mindset, leadership and entrepreneurial thinking.</p>
+      </section>
+    </div>
+    
+    <section style="margin-top:20px;">
+      <h2>Personal Attributes</h2>
+      <ul class="item-desc">
+        <li>Discipline and consistency</li>
+        <li>Strong execution mindset</li>
+        <li>Leadership and entrepreneurial thinking</li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    function downloadResume() {
+      const element = document.querySelector('.resume-page');
+      const opt = {
+        margin:       5, // Small margin for safety
+        filename:     'Nandan_Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true,
+          letterRendering: true,
+          width: element.offsetWidth
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+
+</html>
