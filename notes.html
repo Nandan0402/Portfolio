@@ -1,45 +1,44 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  h1 { color: #ff6b2b; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-  h2 { color: #ff9d00; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-  h3 { color: #444; margin-top: 20px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-  th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-  th { background-color: #f8f9fa; }
-  ul { padding-left: 20px; }
-
-  /* Print Optimization to remove gaps */
-  @media print {
-    body {
-      padding: 0;
-      margin: 10mm;
-      max-width: 100%;
-    }
-    h1, h2, h3 {
-      page-break-after: avoid;
-      margin-top: 15px;
-      margin-bottom: 5px;
-    }
-    table, ul {
-      page-break-inside: avoid;
-    }
-    h1 { margin-top: 0; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curriculum Notes — Nandan B Portfolio</title>
+  <meta name="description" content="Technical study notes and curriculum logs kept by Nandan B during development projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    @media print { .no-print { display: none; } header { display:none; } canvas { display:none; } .page-bg-video-container { display:none; } }
+  </style>
 </head>
 <body>
-  <div style="margin-bottom: 20px; font-size: 14px; border-bottom: 1px solid #eee; padding-bottom: 10px;" class="no-print">
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <span class="logo">Nandan</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="startups.html">Startups</a>
+      <a href="consultation.html">Training</a>
+      <a href="robotics and sensors projects.html">Robotics &amp; Sensors</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="freelance.html">Freelance</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="contact.html">Contact</a>
+          <span class="nav-social-sep">|</span>
+      <a href="https://github.com/Nandan0402" target="_blank" class="nav-icon" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/nandan-b-2a9b1b334" target="_blank" class="nav-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="resume.html" target="_blank" class="nav-icon" title="Resume"><i class="fas fa-file-alt"></i></a>
+      <a href="Nandan_CV.pdf" download class="nav-icon" title="Download CV"><i class="fas fa-file-pdf"></i></a>
+    </nav>
+  </header>
+
+  <div style="margin-bottom: 20px; font-size: 14px; border-bottom: 1px solid rgba(255,100,0,0.2); padding: 14px 40px;" class="no-print">
     <a href="index.html" style="color: #ff6b2b; text-decoration: none; margin-right: 15px;">← Back to Portfolio</a>
     <a href="resume.html" style="color: #ff6b2b; text-decoration: none;">View Resume</a>
   </div>
@@ -249,6 +248,8 @@
     <tr><td>Week 7</td><td></td><td>Bench: ___ | Squat: ___ | DL: ___</td><td></td></tr>
     <tr><td>Week 8</td><td></td><td>Bench: ___ | Squat: ___ | DL: ___</td><td></td></tr>
   </table>
+  <script src="script.js"></script>
 </body>
+
 </html>
 

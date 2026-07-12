@@ -12,8 +12,10 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
 
   <style>
+
     :root {
       --fire-red: #ff3a00;
       --fire-orange: #ff6b2b;
@@ -150,22 +152,9 @@
     }
 
     .cert-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-    }
-
-    .cert-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 40px rgba(255, 100, 0, 0.25), 0 15px 40px rgba(0, 0, 0, 0.5);
-      border-color: rgba(255, 157, 0, 0.5);
     }
 
     .cert-image {
@@ -308,11 +297,7 @@
         gap: 10px;
       }
 
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 14px;
-      }
+
 
       h1 {
         font-size: 32px;
@@ -338,6 +323,11 @@
       <a href="freelance.html">Freelance</a>
       <a href="feedback.html">Feedback</a>
       <a href="contact.html">Contact</a>
+          <span class="nav-social-sep">|</span>
+      <a href="https://github.com/Nandan0402" target="_blank" class="nav-icon" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/nandan-b-2a9b1b334" target="_blank" class="nav-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="resume.html" target="_blank" class="nav-icon" title="Resume"><i class="fas fa-file-alt"></i></a>
+      <a href="Nandan_CV.pdf" download class="nav-icon" title="Download CV"><i class="fas fa-file-pdf"></i></a>
     </nav>
   </header>
 

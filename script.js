@@ -92,11 +92,11 @@
     function loop() {
         ctx.clearRect(0, 0, W, H);
 
-        // Dark background gradient
+        // Dark semi-transparent background gradient to allow video to show through
         const bg = ctx.createLinearGradient(0, 0, 0, H);
-        bg.addColorStop(0, '#0a0000');
-        bg.addColorStop(0.6, '#120400');
-        bg.addColorStop(1, '#1a0800');
+        bg.addColorStop(0, 'rgba(10, 0, 0, 0.15)');
+        bg.addColorStop(0.6, 'rgba(18, 4, 0, 0.25)');
+        bg.addColorStop(1, 'rgba(26, 8, 0, 0.4)');
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, W, H);
 
@@ -176,16 +176,30 @@ async function fetchGitHubStats() {
 function animateValue(id, endValue) {
     const element = document.getElementById(id);
     if (!element) return;
-    let current = 0;
-    const increment = Math.ceil(endValue / 50) || 1;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= endValue) {
-            current = endValue;
-            clearInterval(timer);
-        }
-        element.innerText = `${current}+`;
-    }, 40);
+    
+    if (window.gsap) {
+        const obj = { val: 0 };
+        window.gsap.to(obj, {
+            val: endValue,
+            duration: 2.2,
+            ease: 'power3.out',
+            onUpdate: () => {
+                element.innerText = `${Math.floor(obj.val)}+`;
+            }
+        });
+    } else {
+        // Fallback standard counter
+        let current = 0;
+        const increment = Math.ceil(endValue / 50) || 1;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= endValue) {
+                current = endValue;
+                clearInterval(timer);
+            }
+            element.innerText = `${current}+`;
+        }, 40);
+    }
 }
 
 
@@ -226,7 +240,7 @@ function renderProjects(repos) {
         const btnLabel = livePages[repo.name] ? 'Live Demo 🔥' : 'View Project 🔥';
 
         card.innerHTML = `
-      <img src="${imageUrl}" alt="${repo.name} Preview">
+      <img src="${imageUrl}" alt="${repo.name} Preview" loading="lazy">
       <div class="p-content">
         <h3>${repo.name}</h3>
         <p>${repo.description || 'No description available.'}</p>
@@ -239,12 +253,24 @@ function renderProjects(repos) {
     `;
         container.appendChild(card);
     });
+    setupVanillaTilt();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchGitHubStats();
-    fetchGitHubProjects();
     setupMobileMenu();
+    setupMobileNavSocialIcons();
+    setupVideoBackground();
+    setupVanillaTilt();
+
+    // Dynamically load GSAP, then play advanced animations
+    loadGSAPAndPlay(() => {
+        fetchGitHubStats();
+        fetchGitHubProjects();
+        setupHeroTextReveal();
+        setupScrollReveals();
+        setupMagneticButtons();
+        setupMouseParallax();
+    });
 
     // Attach click sound to interactive elements globally
     const interactiveElements = document.querySelectorAll('a, button, .cert-card, .logo, .mobile-menu-btn');
@@ -254,6 +280,160 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ═══════════════════════════════════════════════════════
+//  🎥 Dynamic Page Background Video Setup (Lazy Loaded)
+// ═══════════════════════════════════════════════════════
+function setupVideoBackground() {
+    // 1. Check if viewport is mobile size
+    const isMobile = window.innerWidth < 768;
+
+    // 2. Define page-to-video mapping dictionary
+    const pageVideoMap = {
+        'index.html': 'google_flow_home.mp4',
+        'about.html': 'google_flow_about.mp4',
+        'skills.html': 'google_flow_skills.mp4',
+        'projects.html': 'google_flow_projects.mp4',
+        'freelance.html': 'google_flow_services.mp4',
+        'robotics and sensors projects.html': 'google_flow_robotics.mp4',
+        'feedback.html': 'google_flow_ugc.mp4',
+        'contact.html': 'google_flow_contact.mp4',
+        'startups.html': 'google_flow_startups.mp4',
+        'consultation.html': 'google_flow_consultation.mp4',
+        'certificates.html': 'google_flow_certificates.mp4',
+        'resume.html': 'google_flow_home.mp4',
+        'notes.html': 'google_flow_about.mp4'
+    };
+
+    // 3. Extract and match current page filename
+    const currentFile = decodeURIComponent(window.location.pathname.split('/').pop()) || 'index.html';
+    const videoFile = pageVideoMap[currentFile];
+
+    if (!videoFile) {
+        console.log(`No background video configured for: ${currentFile}`);
+        return;
+    }
+
+    // 4. Performance optimization: lazy load the video after initial page render is idle
+    const loadVideo = () => {
+        const container = document.createElement('div');
+        container.className = 'page-bg-video-container';
+
+        const video = document.createElement('video');
+        video.className = 'page-bg-video';
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;       // Always start muted — browser autoplay requires it
+        video.playsInline = true;
+
+        // Mobile data optimization: only preload metadata on mobile screens
+        video.setAttribute('preload', isMobile ? 'metadata' : 'auto');
+        video.style.opacity = '0'; // start hidden for smooth fade-in
+
+        const source = document.createElement('source');
+        source.src = videoFile;
+        source.type = 'video/mp4';
+
+        video.appendChild(source);
+
+        const overlay = document.createElement('div');
+        overlay.className = 'page-bg-overlay';
+
+        container.appendChild(video);
+        container.appendChild(overlay);
+        document.body.prepend(container);
+
+        // Fade in after video starts playing to avoid jarring pop
+        video.addEventListener('playing', () => {
+            video.style.opacity = isMobile ? '0.45' : '0.65';
+
+            // Attempt to unmute immediately (browsers allow this if navigating via menu clicks)
+            if (!audioPlayedOnPage) {
+                video.muted = false;
+                video.volume = 0.35;
+
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Autoplay unmuted audio succeeded!
+                        audioPlayedOnPage = true;
+                        let lastTime = 0;
+                        const muteAfterFirstLoop = () => {
+                            if (lastTime > 1 && video.currentTime < 1) {
+                                video.muted = true;
+                                video.removeEventListener('timeupdate', muteAfterFirstLoop);
+                            }
+                            lastTime = video.currentTime;
+                        };
+                        video.addEventListener('timeupdate', muteAfterFirstLoop);
+
+                        // Clean up gesture triggers
+                        document.removeEventListener('click', tryUnmuteOnce);
+                        document.removeEventListener('touchstart', tryUnmuteOnce);
+                        document.removeEventListener('keydown', tryUnmuteOnce);
+                    }).catch(err => {
+                        // Autoplay blocked — fall back to muted play, resume play, and wait for user gesture
+                        video.muted = true;
+                        video.play().catch(playErr => {
+                            console.log("Muted autoplay fallback failed:", playErr);
+                        });
+                        console.log("Autoplay unmuted blocked, waiting for gesture:", err);
+                    });
+                }
+            }
+        }, { once: true });
+
+        // ── Audio: play ONCE per page visit on first user interaction ──────
+        let audioPlayedOnPage = false;
+
+        const tryUnmuteOnce = () => {
+            // Only play audio once per page load
+            if (audioPlayedOnPage) return;
+            audioPlayedOnPage = true;
+
+            // Unmute — browser allows audio after user gesture
+            video.muted = false;
+            video.volume = 0.35; // comfortable background level
+
+            // Track when video loops (currentTime jumps back to near 0)
+            let lastTime = 0;
+            const muteAfterFirstLoop = () => {
+                if (lastTime > 1 && video.currentTime < 1) {
+                    // Video just looped — mute it for all subsequent loops
+                    video.muted = true;
+                    video.removeEventListener('timeupdate', muteAfterFirstLoop);
+                }
+                lastTime = video.currentTime;
+            };
+            video.addEventListener('timeupdate', muteAfterFirstLoop);
+
+            // Remove listener after first unmute
+            document.removeEventListener('click', tryUnmuteOnce);
+            document.removeEventListener('touchstart', tryUnmuteOnce);
+            document.removeEventListener('keydown', tryUnmuteOnce);
+        };
+
+        // Attach to first user gesture (click, touch or key press)
+        document.addEventListener('click',      tryUnmuteOnce, { once: false });
+        document.addEventListener('touchstart', tryUnmuteOnce, { once: false });
+        document.addEventListener('keydown',    tryUnmuteOnce, { once: false });
+        // ────────────────────────────────────────────────────────────────────
+
+        // Error handling fallback (fallback cleanly if file is missing)
+        video.addEventListener('error', () => {
+            console.warn(`Could not load background video: ${videoFile}. Falling back to default layout.`);
+            container.remove();
+        });
+    };
+
+    // Wait until browser is idle or fully loaded before fetching video
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadVideo);
+    } else {
+
+        window.addEventListener('load', loadVideo);
+    }
+}
+
+// ═══════════════════════════════════════════════════════
 //  📱 Mobile Menu Setup
 // ═══════════════════════════════════════════════════════
 function setupMobileMenu() {
@@ -261,12 +441,11 @@ function setupMobileMenu() {
     const nav = document.querySelector('nav');
     
     if (header && nav) {
-        // Create menu button
+        // Create menu button with 3 CSS lines for morphing
         const menuBtn = document.createElement('div');
         menuBtn.className = 'mobile-menu-btn';
-        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        menuBtn.innerHTML = '<span></span><span></span><span></span>';
         
-        // Insert it into header after logo
         // Insert it into header before logo
         const logo = header.querySelector('.logo');
         if (logo) {
@@ -275,114 +454,18 @@ function setupMobileMenu() {
             header.insertBefore(menuBtn, nav);
         }
 
-        // Add dynamic CSS
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .mobile-menu-btn {
-                display: none;
-                color: var(--fire-gold);
-                font-size: 24px;
-                cursor: pointer;
-                z-index: 1000;
-                transition: transform 0.3s;
-                padding: 5px;
-            }
-            .mobile-menu-btn:hover {
-                transform: scale(1.1);
-                color: var(--fire-amber);
-            }
-            @media (max-width: 768px) {
-                header {
-                    justify-content: flex-start !important;
-                    flex-wrap: nowrap !important;
-                    gap: 20px !important;
-                }
-                .mobile-menu-btn {
-                    display: block;
-                    z-index: 1001;
-                    position: relative;
-                }
-                nav {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    position: fixed;
-                    top: 0;
-                    left: -280px;
-                    width: 250px;
-                    height: 100vh;
-                    background: rgba(6, 2, 0, 0.98);
-                    border-right: 3px solid #ff9800; /* Bright vertical orange line like in image */
-                    border-bottom: none;
-                    padding: 80px 15px 30px;
-                    max-height: none;
-                    overflow-y: auto;
-                    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                    gap: 12px !important;
-                    box-shadow: none;
-                    z-index: 1000;
-                }
-
-                /* Custom Scrollbar for Mobile Nav - The "Slide Bar" */
-                nav::-webkit-scrollbar {
-                    width: 4px;
-                }
-                nav::-webkit-scrollbar-track {
-                    background: rgba(0, 0, 0, 0.1);
-                }
-                nav::-webkit-scrollbar-thumb {
-                    background: #ff9800; /* Solid orange line like image 2 */
-                    border-radius: 10px;
-                }
-
-                nav.active {
-                    left: 0;
-                    box-shadow: 20px 0 50px rgba(0,0,0,0.9);
-                }
-
-                nav a {
-                    width: 100%;
-                    padding: 10px 15px;
-                    text-align: left;
-                    font-size: 16px !important;
-                    border-radius: 25px; /* Rounded ends like image 1 */
-                    transition: all 0.3s ease;
-                    color: #fff;
-                    text-decoration: none;
-                }
-                nav a:hover, nav a.active {
-                    background: #ff9800; /* Horizontal orange bar like image 1 */
-                    color: #000 !important;
-                    font-weight: bold;
-                    transform: translateX(5px);
-                }
-                nav a::after {
-                    display: none;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
         // Toggle logic
         menuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             nav.classList.toggle('active');
-            const icon = menuBtn.querySelector('i');
-            if(nav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-            // Sound is handled by mousedown global
+            menuBtn.classList.toggle('open');
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if(!header.contains(e.target) && nav.classList.contains('active')) {
                 nav.classList.remove('active');
-                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                menuBtn.classList.remove('open');
             }
         });
         
@@ -391,12 +474,12 @@ function setupMobileMenu() {
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
-                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                menuBtn.classList.remove('open');
             });
         });
 
-        // Highlight active link
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        // Highlight active link with space decoding support
+        const currentPath = decodeURIComponent(window.location.pathname.split('/').pop()) || 'index.html';
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (href === currentPath) {
@@ -405,15 +488,44 @@ function setupMobileMenu() {
                 link.classList.remove('active');
             }
         });
+
+        // Scroll Shrink Header Trigger
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }, { passive: true });
+
+        // Dynamic Scroll Progress Bar Injection
+        const progressContainer = document.createElement('div');
+        progressContainer.id = 'scroll-progress-container';
+        const progressBar = document.createElement('div');
+        progressBar.id = 'scroll-progress-bar';
+        progressContainer.appendChild(progressBar);
+        document.body.appendChild(progressContainer);
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = `${progress}%`;
+        }, { passive: true });
     }
 }
 
 // ═══════════════════════════════════════════════════════
-//  🔊 UI Interaction Sounds
+//  🔊 UI Interaction Sounds — plays ONCE per session only
 // ═══════════════════════════════════════════════════════
 let audioCtx = null;
+const CLICK_SOUND_KEY = 'nandan_click_played';
 
 function playClickSound() {
+    // Only play on the very first interaction in this browser session
+    if (sessionStorage.getItem(CLICK_SOUND_KEY)) return;
+    sessionStorage.setItem(CLICK_SOUND_KEY, '1');
+
     try {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -439,7 +551,7 @@ function playClickSound() {
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + 0.07);
     } catch (e) {
-        console.warn("Audio play failed:", e);
+        console.warn('Audio play failed:', e);
     }
 }
 
@@ -767,5 +879,172 @@ function initFireToasts() {
 }
 
 document.addEventListener('DOMContentLoaded', initFireToasts);
+
+// ═══════════════════════════════════════════════════════
+//  🎬 Advanced GSAP Animations Upgrade System (Dynamic CDN)
+// ═══════════════════════════════════════════════════════
+function loadGSAPAndPlay(callback) {
+    const coreScript = document.createElement('script');
+    coreScript.src = 'gsap.min.js';
+    coreScript.async = true;
+
+    coreScript.onload = () => {
+        const triggerScript = document.createElement('script');
+        triggerScript.src = 'ScrollTrigger.min.js';
+        triggerScript.async = true;
+
+        triggerScript.onload = () => {
+            if (window.gsap && window.ScrollTrigger) {
+                window.gsap.registerPlugin(window.ScrollTrigger);
+                console.log("GSAP and ScrollTrigger plugins loaded successfully!");
+                callback();
+            }
+        };
+        document.head.appendChild(triggerScript);
+    };
+
+    coreScript.onerror = () => {
+        console.warn("GSAP CDN failed to load. Falling back to default animations.");
+        callback();
+    };
+
+    document.head.appendChild(coreScript);
+}
+
+// ── entrance text/timeline reveal ──
+function setupHeroTextReveal() {
+    if (!window.gsap) return;
+    const gsap = window.gsap;
+
+    const tl = gsap.timeline();
+    if (document.querySelector('.hero-text h1')) {
+        tl.from('.hero-text h1', { opacity: 0, y: 40, duration: 0.85, ease: 'power3.out' });
+        tl.from('.hero-text .subtitle', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out' }, '-=0.55');
+        tl.from('.hero-text .description', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out' }, '-=0.35');
+        tl.from('.cta-buttons a', { opacity: 0, y: 10, stagger: 0.1, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.3');
+        tl.from('.social-chip', { opacity: 0, scale: 0.8, stagger: 0.05, duration: 0.4, ease: 'back.out(1.8)' }, '-=0.25');
+        tl.from('.hero-image', { opacity: 0, scale: 0.9, duration: 0.8, ease: 'power3.out' }, '-=0.75');
+    }
+}
+
+// ── scroll reveals ──
+function setupScrollReveals() {
+    if (!window.gsap) return;
+    const gsap = window.gsap;
+
+    // Headings scroll reveals
+    gsap.utils.toArray('section h2, .section-title, .section-subtitle, .coming-soon-box h3').forEach(elem => {
+        gsap.from(elem, {
+            scrollTrigger: {
+                trigger: elem,
+                start: 'top 88%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 25,
+            duration: 0.65,
+            ease: 'power2.out'
+        });
+    });
+
+    // Cards scroll reveals
+    gsap.utils.toArray('.project-card, .skill-card, .service-card, .stat-item, .cert-card').forEach(card => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 35,
+            scale: 0.97,
+            duration: 0.6,
+            ease: 'power2.out'
+        });
+    });
+}
+
+// ── magnetic cursor pulls ──
+function setupMagneticButtons() {
+    if (!window.gsap) return;
+    const gsap = window.gsap;
+
+    const pullElements = document.querySelectorAll('.btn-primary, .btn-secondary, .social-chip, .logo, .mobile-menu-btn');
+    pullElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            gsap.to(el, {
+                x: x * 0.35,
+                y: y * 0.35,
+                duration: 0.35,
+                ease: 'power2.out'
+            });
+        });
+
+        el.addEventListener('mouseleave', () => {
+            gsap.to(el, {
+                x: 0,
+                y: 0,
+                duration: 0.65,
+                ease: 'elastic.out(1, 0.4)'
+            });
+        });
+    });
+}
+
+// ── mouse ambient lighting parallax ──
+function setupMouseParallax() {
+    if (!window.gsap) return;
+    const gsap = window.gsap;
+
+    window.addEventListener('mousemove', (e) => {
+        const xPercent = (e.clientX / window.innerWidth) - 0.5;
+        const yPercent = (e.clientY / window.innerHeight) - 0.5;
+
+        gsap.to('body', {
+            '--mouse-x': `${xPercent * 35}px`,
+            '--mouse-y': `${yPercent * 35}px`,
+            duration: 0.75,
+            ease: 'power2.out'
+        });
+    });
+}
+
+// ── vanilla-tilt 3d glare cards ──
+function setupVanillaTilt() {
+    if (window.VanillaTilt) {
+        window.VanillaTilt.init(document.querySelectorAll('.premium-card, .skill-card, .project-card, .service-card, .cert-card, .testimonial-card, .contact-card'), {
+            max: 8,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.15,
+            gyroscope: true
+        });
+    }
+}
+
+// ── Dynamic Social Icons Wrapper for Mobile Drawer ──
+function setupMobileNavSocialIcons() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    
+    const icons = nav.querySelectorAll('.nav-icon');
+    if (icons.length === 0) return;
+    
+    const wrapper = document.createElement('div');
+    wrapper.className = 'nav-social-icons-wrapper';
+    
+    // Insert wrapper before the first icon
+    const firstIcon = icons[0];
+    nav.insertBefore(wrapper, firstIcon);
+    
+    // Move all icons into the wrapper
+    icons.forEach(icon => {
+        wrapper.appendChild(icon);
+    });
+}
 
 
