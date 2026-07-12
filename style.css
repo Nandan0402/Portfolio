@@ -206,6 +206,9 @@ nav a:hover, nav a.active {
   color: var(--fire-gold);
 }
 
+nav a:hover::after, nav a.active::after {
+  width: 100%;
+  left: 0;
 }
 
 /* ── Header Social Icons ── */
