@@ -151,16 +151,16 @@ async function fetchGitHubStats() {
     const countElement = document.getElementById('project-count');
     if (!countElement) return;
 
+    const techs = 15;
+    const linkedin = 684;
+    const ig = 108;
+    const startup = 150;
+
     try {
         const username = 'Nandan0402';
         const response = await fetch(`https://api.github.com/users/${username}`);
         if (!response.ok) throw new Error('Failed to fetch user data');
         const data = await response.json();
-
-        const techs = 15;
-        const linkedin = 684;
-        const ig = 108;
-        const startup = 150;
 
         animateValue("project-count", data.public_repos);
         animateValue("tech-count", techs);
@@ -168,8 +168,12 @@ async function fetchGitHubStats() {
         animateValue("ig-count", ig);
         animateValue("startup-count", startup);
     } catch (error) {
-        console.error("Error fetching stats:", error);
-        document.getElementById('project-count').innerText = "10";
+        console.warn("GitHub API rate limited or failed, using local stats fallback:", error);
+        animateValue("project-count", 55);
+        animateValue("tech-count", techs);
+        animateValue("linkedin-count", linkedin);
+        animateValue("ig-count", ig);
+        animateValue("startup-count", startup);
     }
 }
 
@@ -217,8 +221,16 @@ async function fetchGitHubProjects() {
         const repos = await response.json();
         renderProjects(repos);
     } catch (error) {
-        console.error("Error fetching projects:", error);
-        container.innerHTML = `<p style="color:#ff6b2b;">Failed to load projects from GitHub.</p>`;
+        console.warn("GitHub API rate limited or failed. Falling back to local repos.json...", error);
+        try {
+            const fallbackResponse = await fetch('repos.json');
+            if (!fallbackResponse.ok) throw new Error('Failed to load local repos.json');
+            const repos = await fallbackResponse.json();
+            renderProjects(repos);
+        } catch (fallbackError) {
+            console.error("Error loading fallback projects:", fallbackError);
+            container.innerHTML = `<p style="color:#ff6b2b;">Failed to load projects from GitHub.</p>`;
+        }
     }
 }
 
@@ -231,6 +243,8 @@ function renderProjects(repos) {
     const container = document.getElementById('github-projects');
     container.innerHTML = '';
 
+    const fallbackImage = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='150' viewBox='0 0 300 150'><rect width='100%' height='100%' fill='%231a0a03'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ff6b2b' font-family='Outfit, sans-serif' font-size='18' font-weight='bold'>GitHub Project</text></svg>";
+
     repos.forEach(repo => {
         const card = document.createElement('div');
         card.className = 'project-card';
@@ -240,7 +254,7 @@ function renderProjects(repos) {
         const btnLabel = livePages[repo.name] ? 'Live Demo 🔥' : 'View Project 🔥';
 
         card.innerHTML = `
-      <img src="${imageUrl}" alt="${repo.name} Preview" loading="lazy">
+      <img src="${imageUrl}" alt="${repo.name} Preview" loading="lazy" onerror="this.onerror=null; this.src=\`${fallbackImage}\`;">
       <div class="p-content">
         <h3>${repo.name}</h3>
         <p>${repo.description || 'No description available.'}</p>
