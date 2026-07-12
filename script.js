@@ -885,12 +885,12 @@ document.addEventListener('DOMContentLoaded', initFireToasts);
 // ═══════════════════════════════════════════════════════
 function loadGSAPAndPlay(callback) {
     const coreScript = document.createElement('script');
-    coreScript.src = 'gsap.min.js';
+    coreScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
     coreScript.async = true;
 
     coreScript.onload = () => {
         const triggerScript = document.createElement('script');
-        triggerScript.src = 'ScrollTrigger.min.js';
+        triggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js';
         triggerScript.async = true;
 
         triggerScript.onload = () => {
