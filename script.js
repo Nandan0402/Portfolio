@@ -460,10 +460,10 @@ function setupMobileMenu() {
         menuBtn.className = 'mobile-menu-btn';
         menuBtn.innerHTML = '<span></span><span></span><span></span>';
         
-        // Insert it into header before logo
+        // Insert it into header after logo
         const logo = header.querySelector('.logo');
         if (logo) {
-            logo.before(menuBtn);
+            logo.after(menuBtn);
         } else {
             header.insertBefore(menuBtn, nav);
         }

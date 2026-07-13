@@ -16,77 +16,24 @@
   <style>
 
 
-    :root {
-      --fire-red: #ff3a00;
-      --fire-orange: #ff6b2b;
-      --fire-amber: #ff9d00;
-      --fire-gold: #ffd000;
-      --dark-bg: #060200;
-      --card-bg: rgba(255, 80, 0, 0.06);
-      --card-border: rgba(255, 120, 0, 0.25);
-      --text-main: #fff5e6;
-      --text-muted: #c4a88a;
-    }
+    
 
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    
+    
 
-    body {
-      margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background: var(--dark-bg);
-      color: var(--text-main);
-      overflow-x: hidden;
-    }
+    
 
     /* ── NAV HEADER ──────────────────────────────────────── */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 60px;
-      background: rgba(6, 2, 0, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 100, 0, 0.2);
-      box-shadow: 0 0 40px rgba(255, 80, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    
 
-    .logo {
-      font-family: 'Cinzel', serif;
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      background: linear-gradient(135deg, var(--fire-gold), var(--fire-orange), var(--fire-red));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    
 
-    nav { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+    
 
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 0.4px;
-      transition: color 0.3s;
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 2px;
-      background: linear-gradient(90deg, var(--fire-orange), var(--fire-gold));
-      transition: width 0.3s;
-      border-radius: 2px;
-    }
-    nav a:hover { color: var(--fire-gold); }
-    nav a:hover::after { width: 100%; }
+    
+    
+    
+    
     nav a.active { color: var(--fire-amber); }
     nav a.active::after { width: 100%; }
 
@@ -171,7 +118,7 @@
     }
 
     /* ── RESUME HEADER ───────────────────────────────────── */
-    .cv-header { text-align: center; margin-bottom: 36px; border-bottom: 1px solid rgba(255, 120, 0, 0.2); padding-bottom: 28px; }
+    .cv-
     .cv-name {
       font-family: 'Cinzel', serif;
       font-size: 34px;
@@ -242,14 +189,7 @@
 
     /* Experience / Project items */
     .cv-item { margin-bottom: 20px; }
-    .cv-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
+    .cv-item-
     .cv-item-title {
       font-weight: 700;
       font-size: 14.5px;
@@ -323,19 +263,12 @@
     }
 
     /* ── FOOTER ──────────────────────────────────────────── */
-    footer {
-      background: rgba(6, 2, 0, 0.8);
-      text-align: center;
-      padding: 22px;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255, 100, 0, 0.15);
-      font-size: 14px;
-    }
+    
 
     /* ── PRINT / PDF STYLES ──────────────────────────────── */
     @media print {
       header, footer, .action-row, .page-title, .page-subtitle { display: none !important; }
-      body { background: #fff !important; color: #000 !important; }
+      
       .resume-section { padding: 0 !important; max-width: 100% !important; }
       .resume-paper {
         background: #fff !important;
@@ -357,12 +290,12 @@
       .resume-paper { padding: 36px 28px; }
     }
     @media (max-width: 768px) {
-      header { padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
+      
       .resume-section { padding: 30px 4% 60px; }
       .resume-paper { padding: 28px 20px; }
       .cv-name { font-size: 26px; }
       .skill-label { min-width: 160px; }
-      .cv-item-header { flex-direction: column; }
+      .cv-item-
     }
   </style>
 </head>
